@@ -1,0 +1,43 @@
+.img {
+  height: 500px;
+}
+
+.posts_wrapper {
+  margin-top: 5px;
+  margin-top: 10px;
+}
+
+.svg {
+  height: 30px;
+  width: 30px;
+}
+
+h2 {
+  color: gray;
+  font-style: italic;
+}
+
+.cards {
+  margin-left: 2px;
+  margin-right: 2px;
+  border-left: 1px solid grey;
+}
+
+.cards_wrapper {
+  margin-bottom: 10px;
+}
+
+a {
+  color: black;
+}
+
+.card-body {
+  padding: 0px;
+}
+
+.add {
+  padding: 0px;
+  margin: 5px;
+  border: none !important;
+  background-color: rgb(247, 247, 248) !important;
+}
