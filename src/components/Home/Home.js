@@ -43,6 +43,7 @@ function Home() {
             <img
               className={homeStyle.svg}
               src="https://www.pinclipart.com/picdir/middle/71-710741_list-analyze-todo-svg-icon-clipart.png"
+              alt="order"
             ></img>
             <p>Easy to order</p>
           </Card>
@@ -50,6 +51,7 @@ function Home() {
             <img
               className={homeStyle.svg}
               src="https://www.pinclipart.com/picdir/middle/79-797570_warehouse-clipart-black-and-white-warehouse-png-black.png"
+              alt="warehouse"
             ></img>
             <p>Everything in stock</p>
           </Card>
@@ -57,6 +59,7 @@ function Home() {
             <img
               className={homeStyle.svg}
               src="https://www.pngfind.com/pngs/m/612-6123041_express-delivery-free-icon-express-delivery-svg-hd.png"
+              alt="delivery"
             ></img>
             <p>Free delivery</p>
           </Card>
@@ -69,6 +72,7 @@ function Home() {
               className={homeStyle.img}
               variant="top"
               src="https://icdn.digitaltrends.com/image/digitaltrends/pcbuiltkid01-720x720.jpg"
+              alt="How to build a PC"
             />
             <Card.Body>
               <Card.Title>How to build a PC </Card.Title>
@@ -89,6 +93,7 @@ function Home() {
               className={homeStyle.img}
               variant="top"
               src="https://i.ebayimg.com/00/s/MTM1MFgxMDgw/z/NSkAAOSwgiJiFrPg/$_59.JPG"
+              alt="MSI graphic cards"
             />
             <Card.Body>
               <Card.Title>MSI RTX 30 series GPU's</Card.Title>
@@ -112,6 +117,7 @@ function Home() {
               className={homeStyle.img}
               variant="top"
               src="https://www.cgdirector.com/wp-content/uploads/media/2021/08/Gaming-Desktop-vs-Workstation-PCs-An-Overview.jpg"
+              alt="choose a type"
             />
             <Card.Body>
               <Card.Title>

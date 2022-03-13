@@ -1,0 +1,40 @@
+.container {
+  height: 200px;
+
+  width: 100%;
+  background-color: grey;
+  margin-top: 20px;
+}
+
+.list {
+  color: wheat;
+  font-size: large;
+}
+
+.item {
+  background-color: grey !important;
+  border-bottom-width: 20px;
+}
+
+.title {
+  background-color: grey !important;
+  margin: 10px;
+  border: none;
+  font-weight: bold;
+}
+
+.day {
+  background-color: grey !important;
+  border: none;
+  padding: 0 !important;
+}
+
+.about {
+  color: black;
+}
+
+.comment {
+  background-color: grey;
+  height: 100%;
+  width: 100%;
+}
