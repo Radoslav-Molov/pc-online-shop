@@ -33,29 +33,31 @@ function Details() {
               </Card.Body>
               <ListGroup className="list-group-flush">
                 <ListGroupItem>
-                  <strong>CPU:</strong>
+                  <strong>CPU: Some data</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>RAM:</strong>
+                  <strong>RAM: Some data</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>Storage:</strong>
+                  <strong>Storage: Some data</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>GPU:</strong>
+                  <strong>GPU: Some data</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>Motherboard</strong>
+                  <strong>Motherboard: Some data</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>PSU:</strong>
+                  <strong>PSU: Some data</strong>
                 </ListGroupItem>
               </ListGroup>
               <Card.Body>
                 <ListGroupItem className={style.price}>
                   <strong>Price:</strong> 2000$
                 </ListGroupItem>
-                <Button variant="secondary">Add to cart</Button>
+                <Button className={style.cart_btn} variant="secondary">
+                  Add to cart
+                </Button>
               </Card.Body>
             </Col>
           </Row>
@@ -97,7 +99,7 @@ function Details() {
         <h3>Review:</h3>
         <iframe
           className={style.video}
-          src="https://www.youtube.com/embed/g0drhJlZGCk"
+          src="https://www.youtube.com/embed/-dLoif6vazI"
         ></iframe>
       </div>
     </div>

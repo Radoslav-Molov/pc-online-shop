@@ -1,0 +1,42 @@
+.profile_container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.user_info {
+  flex: 20%;
+  max-width: 20%;
+  margin-top: 20px;
+}
+
+.user_info {
+  flex: 20%;
+  max-width: 20%;
+  margin-top: 20px;
+}
+
+.cart {
+  min-width: 60%;
+  margin-top: 20px;
+}
+.cart_container {
+  min-height: 470px;
+}
+
+.cart_item {
+  padding: 3px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  text-align: left;
+  box-shadow: 2px 2px lightgray;
+}
+
+.checkout_btn {
+  position: absolute;
+  bottom: 0px;
+  /* left: 50; */
+  right: 370px;
+}
