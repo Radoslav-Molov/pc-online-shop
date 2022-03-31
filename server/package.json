@@ -1,0 +1,27 @@
+{
+  "name": "pc_online_store_server",
+  "version": "1.0.0",
+  "description": "Server for online PC shop",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "keywords": [
+    "server",
+    "shop",
+    "online"
+  ],
+  "author": "Radoslav Molov",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "concurrently": "^7.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
