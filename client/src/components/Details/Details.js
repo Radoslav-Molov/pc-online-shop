@@ -14,9 +14,10 @@ function Details() {
   return (
     <div className={style.details_wrapper}>
       <div className={style.item_card}>
-        <Card>
+        {/* <h3>Details:</h3> */}
+        <Card id={style.details_card}>
           <Row>
-            <Col>
+            <Col id={style.img_wrapper}>
               <Card.Img
                 className={style.img}
                 variant="top"
@@ -33,6 +34,12 @@ function Details() {
               </Card.Body>
               <ListGroup className="list-group-flush">
                 <ListGroupItem>
+                  <strong>Case: Some data</strong>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <strong>Motherboard: Some data</strong>
+                </ListGroupItem>
+                <ListGroupItem>
                   <strong>CPU: Some data</strong>
                 </ListGroupItem>
                 <ListGroupItem>
@@ -43,9 +50,6 @@ function Details() {
                 </ListGroupItem>
                 <ListGroupItem>
                   <strong>GPU: Some data</strong>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <strong>Motherboard: Some data</strong>
                 </ListGroupItem>
                 <ListGroupItem>
                   <strong>PSU: Some data</strong>
@@ -63,7 +67,15 @@ function Details() {
           </Row>
         </Card>
       </div>
-      <div className={style.add_component}>
+      <div className={style.yt_review}>
+        <h3>Review:</h3>
+        <iframe
+          title="review-video"
+          className={style.video}
+          src="https://www.youtube.com/embed/-dLoif6vazI"
+        ></iframe>
+      </div>
+      {/* <div className={style.add_component}>
         <Table className={style.options_table} bordered>
           <thead>
             <tr className={style.table_title}>Upgrade options:</tr>
@@ -94,15 +106,7 @@ function Details() {
             </tr>
           </tbody>
         </Table>
-      </div>
-      <div className={style.yt_review}>
-        <h3>Review:</h3>
-        <iframe
-        title="review-video"
-          className={style.video}
-          src="https://www.youtube.com/embed/-dLoif6vazI"
-        ></iframe>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -9,6 +9,9 @@ import Details from "./components/Details/Details";
 import Profile from "./components/Profile/Profile";
 import { Route, Routes } from "react-router-dom";
 import Configurator from "./components/Configurator/Configurator";
+import Invoice from "./components/Invoice/Invoice";
+import About from "./components/About/About";
+import Create from "./components/Create/Create";
 
 function App() {
   return (
@@ -22,13 +25,10 @@ function App() {
         <Route path="/details/:id" element={<Details />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/configurator" element={<Configurator />} />
+        <Route path="/invoice/:id" element={<Invoice />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/about" element={<About />} />
       </Routes>
-      {/* <Home /> */}
-      {/* <Login /> */}
-      {/* <Register /> */}
-      {/* <Catalog /> */}
-      {/* <Details /> */}
-      {/* <Profile /> */}
       <Footer />
     </div>
   );

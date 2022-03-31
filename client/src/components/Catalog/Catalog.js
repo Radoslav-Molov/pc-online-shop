@@ -1,8 +1,20 @@
-import React from "react";
-import { Breadcrumb, Card, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Breadcrumb } from "react-bootstrap";
 import style from "../Catalog/Catalog.module.css";
 
 function Catalog() {
+  useEffect(() => {
+    fetch("http://localhost:5000/api/products", {
+      method: "GET",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => JSON.stringify(res))
+      .then((res) => console.log(res));
+  });
+
   return (
     <div>
       <Breadcrumb className={style.crumb}>
@@ -11,162 +23,6 @@ function Catalog() {
           Business
         </Breadcrumb.Item>
       </Breadcrumb>
-      <div className={style.cards_container}>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-        <Card className={style.each_card} style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-          />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-      </div>
     </div>
   );
 }

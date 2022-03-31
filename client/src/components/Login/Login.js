@@ -27,7 +27,7 @@ function Login() {
         <p>
           Don't have an account?{" "}
           <Link className={style.reg_tag} to="/register">
-            Register
+            <strong>Register</strong>
           </Link>
         </p>
 

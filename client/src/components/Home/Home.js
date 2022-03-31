@@ -7,7 +7,7 @@ import homeStyle from "../Home/Home.module.css";
 function Home() {
   return (
     <div>
-      <Carousel className={homeStyle.flag} overflow-hidden>
+      <Carousel className={homeStyle.flag}>
         <Carousel.Item className={homeStyle.caption}>
           <img
             className="d-block w-100 h-100 "
@@ -31,7 +31,7 @@ function Home() {
           <Carousel.Caption>
             <h3>Build your dream PC</h3>
             <p>
-              Build your PC - choose between the OG and the latest components on
+              Configurator - choose between the OG and the latest components on
               the best prices.
             </p>
           </Carousel.Caption>
@@ -64,7 +64,7 @@ function Home() {
             <p>Free delivery</p>
           </Card>
         </CardGroup>
-        <h2>Blog:</h2>
+        <h2>Useful posts:</h2>
 
         <CardGroup>
           <Card className={homeStyle.cards}>
@@ -81,9 +81,10 @@ function Home() {
                 process mostly involves screwing in the right screws and
                 connecting the right cables, so as long as you're careful with
                 your components and take the proper safety precautions, you can
-                build your own PC. We've broken down the process into a series of easy-to-follow steps. 
-                From gathering your components to putting on the finishing touches, 
-                our guide will walk you through how to easily build a PC.
+                build your own PC. We've broken down the process into a series
+                of easy-to-follow steps. From gathering your components to
+                putting on the finishing touches, our guide will walk you
+                through how to easily build a PC.
               </Card.Text>
               <Card.Link href="https://www.digitaltrends.com/computing/how-to-build-a-pc/">
                 Read more..
@@ -130,10 +131,11 @@ function Home() {
                 and another, a ‘Gaming’ PC? Surely, it can’t just be the RGB (or
                 lack thereof). You often hear manufacturers promote their latest
                 product as ‘the best in the gaming market,’ but then you see
-                them listed in professional setups. What’s that about? The world of PC 
-                hardware includes a vast array of terminology. Hence, finding minor 
-                differences between various types of hardware, like those used in 
-                workstations and/or gaming PCs, can get really confusing at times.
+                them listed in professional setups. What’s that about? The world
+                of PC hardware includes a vast array of terminology. Hence,
+                finding minor differences between various types of hardware,
+                like those used in workstations and/or gaming PCs, can get
+                really confusing at times.
               </Card.Text>
               <Card.Link href="https://www.cgdirector.com/workstation-vs-gaming-pc/">
                 Read more..

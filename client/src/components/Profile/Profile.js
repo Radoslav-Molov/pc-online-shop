@@ -1,11 +1,7 @@
 import React from "react";
 import style from "../Profile/Profile.module.css";
-import {
-  Card,
-  ListGroup,
-  ListGroupItem,
-  Button
-} from "react-bootstrap";
+import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 function Profile() {
   return (
     <div className={style.profile_container}>
@@ -29,40 +25,64 @@ function Profile() {
       </div>
       <div className={style.cart}>
         <Card className={style.cart_container}>
-          <Card.Header as="h5">Cart</Card.Header>
+          <Card.Header as="h5">Orders</Card.Header>
           <Card.Body>
-          <div className={style.cart_item}>
+            <div className={style.cart_item}>
               <div className={style.cart_item_info}>
-              <Card.Title>Gaming PC</Card.Title>
-              <Card.Text>
-                <strong>Price:</strong> 2000$
-              </Card.Text>
+                <Card.Text>
+                  <strong>Order #:</strong>
+                </Card.Text>
+                <Card.Text>
+                  <strong>Date:</strong>{" "}
+                </Card.Text>
+                <Card.Text>
+                  <strong>Total:</strong> 2000$
+                </Card.Text>
               </div>
-              <Button variant="secondary">X</Button>
-            </div><div className={style.cart_item}>
-              <div className={style.cart_item_info}>
-              <Card.Title>Gaming PC</Card.Title>
-              <Card.Text>
-                <strong>Price:</strong> 2000$
-              </Card.Text>
-              </div>
-              <Button variant="secondary">X</Button>
-            </div><div className={style.cart_item}>
-              <div className={style.cart_item_info}>
-              <Card.Title>Gaming PC</Card.Title>
-              <Card.Text>
-                <strong>Price:</strong> 2000$
-              </Card.Text>
-              </div>
-              <Button variant="secondary">X</Button>
+              <Button variant="secondary">
+                <Link className={style.link} to="/invoice/1">
+                  Details
+                </Link>
+              </Button>
             </div>
-            
+            <div className={style.cart_item}>
+              <div className={style.cart_item_info}>
+                <Card.Text>
+                  <strong>Order #:</strong>
+                </Card.Text>
+                <Card.Text>
+                  <strong>Date:</strong>{" "}
+                </Card.Text>
+                <Card.Text>
+                  <strong>Total:</strong> 2000$
+                </Card.Text>
+              </div>
+              <Button variant="secondary">
+                <Link className={style.link} to="/invoice/1">
+                  Details
+                </Link>
+              </Button>
+            </div>
+            <div className={style.cart_item}>
+              <div className={style.cart_item_info}>
+                <Card.Text>
+                  <strong>Order #:</strong> 315
+                </Card.Text>
+                <Card.Text>
+                  <strong>Date:</strong> 20.20.2022g
+                </Card.Text>
+                <Card.Text>
+                  <strong>Total:</strong> 2000$
+                </Card.Text>
+              </div>
+              <Button variant="secondary">
+                <Link className={style.link} to="/invoice/1">
+                  Details
+                </Link>
+              </Button>
+            </div>
           </Card.Body>
-          
         </Card>
-        <Button className={style.checkout_btn} variant="secondary">
-              Checkout
-        </Button>
       </div>
     </div>
   );

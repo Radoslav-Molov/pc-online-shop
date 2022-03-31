@@ -11,11 +11,11 @@
   background: #3b4147;
   color: rgb(252, 249, 249);
   margin: auto;
-  margin-top: 100px;
+  margin-top: 50px;
   position: relative;
 }
 
-#form{
+#form {
   margin-left: 0px;
 }
 
@@ -56,22 +56,24 @@
   width: 100%;
 } */
 
-#mail, #area{
+#mail,
+#area {
   background-color: rgb(205, 205, 206);
 }
 
-.links, .text{
+.links,
+.text {
   text-decoration: none;
   color: rgb(196, 219, 219);
   font-size: large;
   font-weight: 400;
 }
 
-.links:hover{
+.links:hover {
   color: rgb(190, 184, 178);
 }
 
-#btn{
+#btn {
   background-color: rgb(182, 181, 181);
   color: black;
   border: groove 0.5px rgb(202, 201, 201);
@@ -82,14 +84,12 @@
   font-weight: 500;
 }
 
-#bnt:hover{
+#bnt:hover {
   color: beige;
   background-color: rgb(119, 118, 118);
 }
 
-#bottom{
+#bottom {
   background-color: #343a40;
   color: #ccc;
 }
-
-

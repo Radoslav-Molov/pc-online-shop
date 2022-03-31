@@ -3,7 +3,6 @@ import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import style from "../Register/Register.module.css";
 
-
 function Register() {
   return (
     <div className={style.register_container}>
@@ -41,14 +40,6 @@ function Register() {
             placeholder="Enter your email"
           />
         </Form.Group>
-        <Form.Group controlId="formRepeatEmail">
-          <Form.Label>Repeat email address:</Form.Label>
-          <Form.Control
-            id={style.formEmail}
-            type="email"
-            placeholder="Repeat your email"
-          />
-        </Form.Group>
         <Form.Group controlId="formPassword">
           <Form.Label>Password:</Form.Label>
           <Form.Control
@@ -60,7 +51,7 @@ function Register() {
         <p>
           Already have an account?{" "}
           <Link className={style.log_tag} to="/login">
-            Login
+            <strong>Login</strong>
           </Link>
         </p>
 

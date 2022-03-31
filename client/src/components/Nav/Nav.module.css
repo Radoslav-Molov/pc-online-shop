@@ -1,24 +1,47 @@
-.anchor{
-    text-decoration: none;
-    color: rgb(161, 161, 161);
-    font-size: 17px;
+.anchor {
+  text-decoration: none;
+  color: rgb(161, 161, 161);
+  font-size: 17px;
 }
 
-#logout_btn{
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: rgb(161, 161, 161);
-    font-size: 17px;
+.anchor:hover {
+  color: white;
 }
 
-#logout_btn:hover{
-    color: blue;
-    background-color: transparent;
+#logout_btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: rgb(161, 161, 161);
+  font-size: 17px;
 }
 
-#title{
-text-decoration: none;
-color: lightgray;
-font-size: 21px;
+#logout_btn:hover {
+  color: white;
+  background-color: transparent;
+}
+
+#title {
+  text-decoration: none;
+  color: lightgray;
+  font-size: 21px;
+}
+
+.cart_img {
+  height: 30px;
+  width: 30;
+  background: transparent;
+  background-color: transparent;
+}
+
+#cart_icon {
+  color: rgb(190, 189, 189);
+}
+
+#cart_icon:hover {
+  color: white;
+}
+
+#create_icon {
+  color: rgb(190, 189, 189);
 }
