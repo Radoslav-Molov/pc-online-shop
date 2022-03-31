@@ -1,10 +1,13 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import style from "../Register/Register.module.css";
+
 
 function Register() {
   return (
     <div className={style.register_container}>
+      <h1>Register</h1>
       <Form>
         <Form.Group controlId="formName">
           <Form.Label>Name:</Form.Label>
@@ -56,9 +59,9 @@ function Register() {
         </Form.Group>
         <p>
           Already have an account?{" "}
-          <a className={style.log_tag} href="/register">
+          <Link className={style.log_tag} to="/login">
             Login
-          </a>
+          </Link>
         </p>
 
         <Button variant="secondary" type="submit">

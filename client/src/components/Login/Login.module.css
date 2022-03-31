@@ -8,6 +8,7 @@
   margin-top: 50px;
   margin-bottom: 50px;
   padding: 30px;
+  margin-top: 90px;
 }
 
 #formEmail {
@@ -19,4 +20,14 @@
 .reg_tag {
   color: black;
   text-decoration: none;
+}
+
+#login_title{
+  margin-bottom: 30px;
+  font-style: inherit;
+}
+
+div > label {
+  font-weight: 500;
+  margin: 7px
 }

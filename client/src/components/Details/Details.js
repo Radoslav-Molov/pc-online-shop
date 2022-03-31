@@ -52,7 +52,7 @@ function Details() {
                 </ListGroupItem>
               </ListGroup>
               <Card.Body>
-                <ListGroupItem className={style.price}>
+                <ListGroupItem id={style.price}>
                   <strong>Price:</strong> 2000$
                 </ListGroupItem>
                 <Button className={style.cart_btn} variant="secondary">
@@ -98,6 +98,7 @@ function Details() {
       <div className={style.yt_review}>
         <h3>Review:</h3>
         <iframe
+        title="review-video"
           className={style.video}
           src="https://www.youtube.com/embed/-dLoif6vazI"
         ></iframe>

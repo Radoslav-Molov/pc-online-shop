@@ -4,10 +4,7 @@ import {
   Card,
   ListGroup,
   ListGroupItem,
-  Button,
-  Row,
-  Col,
-  Table,
+  Button
 } from "react-bootstrap";
 function Profile() {
   return (
@@ -34,32 +31,38 @@ function Profile() {
         <Card className={style.cart_container}>
           <Card.Header as="h5">Cart</Card.Header>
           <Card.Body>
-            {/* <div className={style.cart_item}>
+          <div className={style.cart_item}>
+              <div className={style.cart_item_info}>
               <Card.Title>Gaming PC</Card.Title>
               <Card.Text>
                 <strong>Price:</strong> 2000$
               </Card.Text>
-              <Button variant="secondary">Remove</Button>
-            </div> */}
-            <div className={style.cart_item}>
+              </div>
+              <Button variant="secondary">X</Button>
+            </div><div className={style.cart_item}>
+              <div className={style.cart_item_info}>
               <Card.Title>Gaming PC</Card.Title>
               <Card.Text>
                 <strong>Price:</strong> 2000$
               </Card.Text>
-              <Button variant="secondary">Remove</Button>
+              </div>
+              <Button variant="secondary">X</Button>
+            </div><div className={style.cart_item}>
+              <div className={style.cart_item_info}>
+              <Card.Title>Gaming PC</Card.Title>
+              <Card.Text>
+                <strong>Price:</strong> 2000$
+              </Card.Text>
+              </div>
+              <Button variant="secondary">X</Button>
             </div>
-            <div className={style.cart_item}>
-              <Card.Title>Gaming PC</Card.Title>
-              <Card.Text>
-                <strong>Price:</strong> 2000$
-              </Card.Text>
-              <Button variant="secondary">Remove</Button>
-            </div>
-            <Button className={style.checkout_btn} variant="secondary">
-              Go to checkout
-            </Button>
+            
           </Card.Body>
+          
         </Card>
+        <Button className={style.checkout_btn} variant="secondary">
+              Checkout
+        </Button>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import Catalog from "./components/Catalog/Catalog";
 import Details from "./components/Details/Details";
 import Profile from "./components/Profile/Profile";
 import { Route, Routes } from "react-router-dom";
+import Configurator from "./components/Configurator/Configurator";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/catalog" element={<Catalog />} />
-        <Route path="/details" element={<Details />} />
+        <Route path="/details/:id" element={<Details />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/configurator" element={<Configurator />} />
       </Routes>
       {/* <Home /> */}
       {/* <Login /> */}

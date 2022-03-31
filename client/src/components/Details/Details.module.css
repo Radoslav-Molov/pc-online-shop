@@ -30,7 +30,7 @@
   height: 100%;
 }
 
-.price {
+#price {
   border: none;
   margin-bottom: 5px;
 }

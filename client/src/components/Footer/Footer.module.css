@@ -1,11 +1,6 @@
 .container {
-  /* position: absolute;
-  bottom: 0;
-  height: 200px; */
-
   width: 100%;
   height: 180px;
-  /* background-color: rgb(128, 127, 127); */
   position: absolute;
   bottom: 0;
 }
@@ -13,12 +8,18 @@
 .wrapper {
   width: 100%;
   height: 220px;
-  background: #ccc;
+  background: #3b4147;
+  color: rgb(252, 249, 249);
   margin: auto;
+  margin-top: 100px;
   position: relative;
 }
 
-.row {
+#form{
+  margin-left: 0px;
+}
+
+/* .row {
   background-color: rgb(128, 127, 127);
 }
 
@@ -53,4 +54,42 @@
   background-color: grey;
   height: 100%;
   width: 100%;
+} */
+
+#mail, #area{
+  background-color: rgb(205, 205, 206);
 }
+
+.links, .text{
+  text-decoration: none;
+  color: rgb(196, 219, 219);
+  font-size: large;
+  font-weight: 400;
+}
+
+.links:hover{
+  color: rgb(190, 184, 178);
+}
+
+#btn{
+  background-color: rgb(182, 181, 181);
+  color: black;
+  border: groove 0.5px rgb(202, 201, 201);
+  border-radius: 5px;
+  height: 30px;
+  width: 100px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+#bnt:hover{
+  color: beige;
+  background-color: rgb(119, 118, 118);
+}
+
+#bottom{
+  background-color: #343a40;
+  color: #ccc;
+}
+
+
