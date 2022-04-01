@@ -20,13 +20,4 @@ router.post("/", (req, res) => {
   newFeedback.save().then((feedback) => res.json(feedback));
 });
 
-// route DELETE api/feedback
-router.delete("/:id", (req, res) => {
-  Feedback.findById(req.params.id)
-    .then((feedback) =>
-      feedback.remove().then(() => res.json({ success: true }))
-    )
-    .catch((res) => res.status(404).json({ success: false }));
-});
-
 module.exports = router;

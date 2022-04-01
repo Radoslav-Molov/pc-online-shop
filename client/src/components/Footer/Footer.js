@@ -1,10 +1,31 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import style from "../Footer/Footer.module.css";
 // import { ListGroup, Row, Col } from "react-bootstrap";
 
 function Footer() {
-  const onFeedbackSubmit = () => {};
+  const [email, setEmail] = useState("");
+  const [content, setContent] = useState("");
+
+  const emailHandler = (e) => {
+    setEmail(e.currentTarget.value);
+  };
+
+  const contentHandler = (e) => {
+    setContent(e.currentTarget.value);
+  };
+
+  const onFeedbackSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:5000/api/feedbacks", {
+        email: email,
+        content: content,
+      })
+      .then((res) => console.log(res));
+  };
 
   return (
     <div className={style.wrapper}>
@@ -46,13 +67,14 @@ function Footer() {
               </ul>
             </div>
 
-            <div className="col-md-3 mb-3">
+            <div className="col-md-3 mb-2">
               <h5 className="text-uppercase">Leave feedback:</h5>
 
               <form id={style.form}>
                 <fieldset className="form-group">
                   <input
                     id={style.mail}
+                    onBlur={emailHandler}
                     type="email"
                     className="form-control"
                     placeholder="Enter email"
@@ -61,6 +83,7 @@ function Footer() {
                 <fieldset className="form-group mt-1">
                   <textarea
                     id={style.area}
+                    onBlur={contentHandler}
                     className="form-control"
                     placeholder="Message"
                   ></textarea>

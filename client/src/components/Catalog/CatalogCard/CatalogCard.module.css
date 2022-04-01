@@ -1,18 +1,26 @@
-.crumb {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.cards_container {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
+.image {
+  height: 300px;
+  width: 100%;
+  margin-top: 5px;
 }
 
 .each_card {
-  flex: 20%;
-  min-width: 20%;
-  max-width: 20%;
+  margin: 10px;
+  width: 24%;
+}
+
+.button {
+  position: relative;
+  bottom: 0;
+}
+
+.anchor {
+  text-decoration: none;
+  color: white;
+}
+
+.info_container {
+  margin-top: 10px;
+  height: 215px;
+  width: 100%;
 }

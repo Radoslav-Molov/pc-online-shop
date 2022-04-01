@@ -1,25 +1,38 @@
-import React from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Card, Button, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import style from "../CatalogCard/CatalogCard.module.css";
 
-function CatalogCard() {
+function CatalogCard(props) {
   return (
-    <div className={style.cards_container}>
-      <Card className={style.each_card} style={{ width: "18rem" }}>
-        <Card.Img
-          variant="top"
-          src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-        />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+    <Card className={style.each_card} style={{ width: "18rem" }}>
+      <Card.Img className={style.image} variant="top" src={props.image} />
+      <Card.Body>
+        <Container className={style.info_container}>
+          <Card.Title>
+            <strong>{props.title}</strong>
+          </Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            <strong>CPU</strong>: {props.cpu}
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-    </div>
+          <Card.Text>
+            <strong>RAM</strong>: {props.ram}
+          </Card.Text>
+          <Card.Text>
+            <strong>GPU</strong>: {props.gpu}
+          </Card.Text>
+          <Card.Text>
+            <strong>Price</strong>: {props.price} $
+          </Card.Text>
+        </Container>
+
+        <Button className={style.button} variant="secondary">
+          <Link className={style.anchor} to={`/details/${props.id}`}>
+            Details
+          </Link>
+        </Button>
+      </Card.Body>
+    </Card>
   );
 }
 

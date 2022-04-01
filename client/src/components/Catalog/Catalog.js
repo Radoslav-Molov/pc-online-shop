@@ -1,28 +1,41 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
 import style from "../Catalog/Catalog.module.css";
+import CatalogCard from "./CatalogCard/CatalogCard";
 
 function Catalog() {
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/products", {
-      method: "GET",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => JSON.stringify(res))
-      .then((res) => console.log(res));
-  });
+    axios
+      .get("http://localhost:5000/api/products")
+      .then((res) => setProducts(res.data));
+  }, []);
 
   return (
-    <div>
-      <Breadcrumb className={style.crumb}>
-        <Breadcrumb.Item href="#">Gaming</Breadcrumb.Item>
-        <Breadcrumb.Item href="#" active>
-          Business
-        </Breadcrumb.Item>
-      </Breadcrumb>
+    <div id={style.catalog_wrapper}>
+      {products.map((product) =>
+        product.title.includes("Custom") ? (
+          ""
+        ) : (
+          <CatalogCard
+            key={product._id}
+            id={product._id}
+            title={product.title}
+            case={product.case}
+            motherboard={product.motherboard}
+            cpu={product.cpu}
+            ram={product.ram}
+            storage={product.storage}
+            gpu={product.gpu}
+            psu={product.psu}
+            image={product.image}
+            price={product.price}
+            reviewLink={product.reviewLink}
+          />
+        )
+      )}
     </div>
   );
 }

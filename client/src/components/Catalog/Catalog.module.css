@@ -1,18 +1,5 @@
-.crumb {
+#catalog_wrapper {
   display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.cards_container {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
   flex-wrap: wrap;
-}
-
-.each_card {
-  flex: 20%;
-  min-width: 20%;
-  max-width: 20%;
+  justify-content: center;
 }

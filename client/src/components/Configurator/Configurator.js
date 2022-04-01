@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, Image, Button, ListGroup } from "react-bootstrap";
 import style from "../Configurator/Configurator.module.css";
@@ -75,14 +76,9 @@ function Configurator() {
   }, [setup]);
 
   const onOrderHandler = () => {
-    fetch("http://localhost:5000/api/products", {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: "Custom Build",
+    axios
+      .post("http://localhost:5000/api/products", {
+        title: "Custom build",
         case: setup.case,
         motherboard: setup.motherboard,
         cpu: setup.cpu,
@@ -92,8 +88,9 @@ function Configurator() {
         psu: setup.psu,
         image: selectedCaseImg,
         price: total,
-      }),
-    }).then((res) => console.log(res));
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (

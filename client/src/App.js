@@ -27,7 +27,7 @@ function App() {
         <Route path="/configurator" element={<Configurator />} />
         <Route path="/invoice/:id" element={<Invoice />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/about" element={<About />} />
+        {/* <Route path="/about" element={<About />} /> */}
       </Routes>
       <Footer />
     </div>

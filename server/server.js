@@ -1,10 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const products = require("./routes/api/products");
+const feedbacks = require("./routes/api/feedbacks");
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -16,6 +20,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/products", products);
+app.use("/api/feedbacks", feedbacks);
 
 const port = process.env.PORT || 5000;
 

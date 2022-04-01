@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../Details/Details.module.css";
 import {
   Card,
@@ -7,60 +7,72 @@ import {
   Button,
   Row,
   Col,
-  Table,
 } from "react-bootstrap";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Details() {
+  const [productId, setProductId] = useState(
+    window.location.pathname.split("/")[2]
+  );
+  const [productInfo, setProductInfo] = useState("");
+
+  useEffect(() => {
+    // setProductId(window.location.pathname.split("/")[2]);
+
+    axios
+      .get(`http://localhost:5000/api/products/${productId}`)
+      .then((res) => setProductInfo(res.data));
+  }, []);
+
   return (
     <div className={style.details_wrapper}>
       <div className={style.item_card}>
         {/* <h3>Details:</h3> */}
         <Card id={style.details_card}>
-          <Row>
+          <Row id={style.content}>
             <Col id={style.img_wrapper}>
               <Card.Img
                 className={style.img}
                 variant="top"
-                src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
+                src={productInfo.image}
               />
             </Col>
             <Col>
               <Card.Body>
-                <Card.Title>PC Name</Card.Title>
-                <Card.Text>
-                  <strong>Description:</strong>
-                  <p>The best budget PC you can run everything on</p>
-                </Card.Text>
+                <Card.Title>{productInfo.title}</Card.Title>
               </Card.Body>
               <ListGroup className="list-group-flush">
                 <ListGroupItem>
-                  <strong>Case: Some data</strong>
+                  <strong>Case: {productInfo.case}</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>Motherboard: Some data</strong>
+                  <strong>Motherboard: {productInfo.motherboard}</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>CPU: Some data</strong>
+                  <strong>CPU: {productInfo.cpu}</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>RAM: Some data</strong>
+                  <strong>RAM: {productInfo.ram}</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>Storage: Some data</strong>
+                  <strong>Storage: {productInfo.storage}</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>GPU: Some data</strong>
+                  <strong>GPU: {productInfo.gpu}</strong>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <strong>PSU: Some data</strong>
+                  <strong>PSU: {productInfo.psu}</strong>
                 </ListGroupItem>
               </ListGroup>
               <Card.Body>
                 <ListGroupItem id={style.price}>
-                  <strong>Price:</strong> 2000$
+                  <strong>Price:</strong> {productInfo.price} $
                 </ListGroupItem>
                 <Button className={style.cart_btn} variant="secondary">
-                  Add to cart
+                  <Link className={style.anchor} to="/profile">
+                    Add to cart
+                  </Link>
                 </Button>
               </Card.Body>
             </Col>
@@ -68,45 +80,15 @@ function Details() {
         </Card>
       </div>
       <div className={style.yt_review}>
-        <h3>Review:</h3>
+        <h3>
+          <strong>Product Review</strong>
+        </h3>
         <iframe
           title="review-video"
           className={style.video}
-          src="https://www.youtube.com/embed/-dLoif6vazI"
+          src={productInfo.reviewLink}
         ></iframe>
       </div>
-      {/* <div className={style.add_component}>
-        <Table className={style.options_table} bordered>
-          <thead>
-            <tr className={style.table_title}>Upgrade options:</tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>RAM</th>
-              <td>
-                <div className={style.option}>+4GB (50$)</div>
-                <div className={style.option}>+8GB (100$)</div>
-                <div className={style.option}>+12GB (150$)</div>
-              </td>
-            </tr>
-            <tr>
-              <th>Storage:</th>
-              <td>
-                <div className={style.option}>+256GB SSD (100$)</div>
-                <div className={style.option}>+512GB SSD (200$)</div>
-                <div className={style.option}>+1TB SSD (300$)</div>
-              </td>
-            </tr>
-            <tr>
-              <th>Operation system:</th>
-              <td>
-                <div className={style.option}>Windows 10 (40$)</div>
-                <div className={style.option}>Windows 11 (70$)</div>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </div> */}
     </div>
   );
 }
