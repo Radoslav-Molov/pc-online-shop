@@ -79,3 +79,7 @@
   text-decoration: none;
   color: white;
 }
+
+.anchor:hover {
+  color: rgb(219, 219, 219);
+}

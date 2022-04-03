@@ -25,6 +25,17 @@ function Details() {
       .then((res) => setProductInfo(res.data));
   }, []);
 
+  const onOrderHandler = () => {
+    console.log("ue");
+    axios
+      .post("http://localhost:5000/api/cart", {
+        image: productInfo.image,
+        title: productInfo.title,
+        price: productInfo.price,
+      })
+      .then((res) => console.log(res));
+  };
+
   return (
     <div className={style.details_wrapper}>
       <div className={style.item_card}>
@@ -69,7 +80,11 @@ function Details() {
                 <ListGroupItem id={style.price}>
                   <strong>Price:</strong> {productInfo.price} $
                 </ListGroupItem>
-                <Button className={style.cart_btn} variant="secondary">
+                <Button
+                  onClick={onOrderHandler}
+                  className={style.cart_btn}
+                  variant="secondary"
+                >
                   <Link className={style.anchor} to="/profile">
                     Add to cart
                   </Link>

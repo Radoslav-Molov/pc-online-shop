@@ -24,3 +24,7 @@
   height: 215px;
   width: 100%;
 }
+
+.anchor:hover {
+  color: rgb(219, 219, 219);
+}

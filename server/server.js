@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const products = require("./routes/api/products");
 const feedbacks = require("./routes/api/feedbacks");
+const orders = require("./routes/api/orders");
+const cart = require("./routes/api/cart");
 
 const app = express();
 
@@ -21,6 +23,8 @@ mongoose
 
 app.use("/api/products", products);
 app.use("/api/feedbacks", feedbacks);
+app.use("/api/cart", cart);
+app.use("/api/orders", orders);
 
 const port = process.env.PORT || 5000;
 

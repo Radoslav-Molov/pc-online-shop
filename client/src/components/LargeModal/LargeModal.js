@@ -1,8 +1,73 @@
-import React from "react";
-import { Modal, Container, Button, Row, Col, Form } from "react-bootstrap";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Modal, Container, Button, Form } from "react-bootstrap";
 import style from "../LargeModal/LargeModal.module.css";
+import EachProduct from "./EachProduct/EachProduct";
 
 function LargeModal(props) {
+  const [cartProducts, setCartProducts] = useState([]);
+  const [name, setName] = useState("[]");
+  const [surname, setSurname] = useState("[]");
+  const [number, setNumber] = useState("[]");
+  const [city, setCity] = useState("[]");
+  const [address, setAddress] = useState("[]");
+  let [total, setTotal] = useState(0);
+  let [orderNumber, setOrderNumber] = useState(0);
+  const [productNames, setProductNames] = useState([]);
+
+  const onNameHandler = (e) => {
+    setName(e.target.value);
+  };
+
+  const onSurnameHandler = (e) => {
+    setSurname(e.target.value);
+  };
+
+  const onNumberHandler = (e) => {
+    setNumber(e.target.value);
+  };
+
+  const onCityHandler = (e) => {
+    setCity(e.target.value);
+  };
+
+  const onAddressHandler = (e) => {
+    setAddress(e.target.value);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/cart")
+      .then((res) => setCartProducts(res.data));
+  }, [cartProducts]);
+
+  useEffect(() => {
+    cartProducts.forEach((product) => {
+      let price = 0;
+      price += product.price;
+
+      setTotal(price);
+    });
+  }, [cartProducts]);
+
+  const onOrderHandler = (e) => {
+    e.preventDefault();
+
+    setOrderNumber(orderNumber++);
+
+    axios
+      .post("http://localhost:5000/api/orders", {
+        order: orderNumber,
+        total: total,
+        name: name,
+        surname: surname,
+        number: number,
+        city: city,
+        address: address,
+      })
+      .then((res) => res.json());
+  };
+
   return (
     <Modal size="lg" {...props} aria-labelledby="example-modal-sizes-title-lg">
       <Modal.Header closeButton>
@@ -12,46 +77,22 @@ function LargeModal(props) {
       </Modal.Header>
       <Modal.Body>
         <Container>
-          <Row className={style.cart_item}>
-            <Col xs={6} md={4}>
-              <img
-                className={style.modal_img}
-                src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-                alt="itemImg"
-              ></img>
-              {/* .col-xs-6 .col-md-4 */}
-            </Col>
-            <Col className={style.cart_item_text} xs={6} md={5}>
-              Some computer name
-              {/* .col-xs-6 .col-md-4 */}
-            </Col>
-            <Col className={style.cart_item_text} xs={5} md={2}>
-              Price
-            </Col>
-            <Col className={style.cart_item_text} xs={3} md={1}>
-              <button className={style.item_remove}>X</button>
-            </Col>
-          </Row>
-          <Row className={style.cart_item}>
-            <Col xs={6} md={4}>
-              <img
-                className={style.modal_img}
-                src="https://www.digitalstorm.com/img/products/lynx/2021-hero-mobile-2.jpg"
-                alt="itemImg"
-              ></img>
-              {/* .col-xs-6 .col-md-4 */}
-            </Col>
-            <Col className={style.cart_item_text} xs={6} md={5}>
-              Some computer name
-              {/* .col-xs-6 .col-md-4 */}
-            </Col>
-            <Col className={style.cart_item_text} xs={5} md={2}>
-              Price
-            </Col>
-            <Col className={style.cart_item_text} xs={3} md={1}>
-              <button className={style.item_remove}>X</button>
-            </Col>
-          </Row>
+          {cartProducts.length === 0 ? (
+            <h3 id={style.cart_heading}>No items in cart</h3>
+          ) : (
+            cartProducts.map((product) => (
+              <EachProduct
+                key={product._id}
+                id={product._id}
+                image={product.image}
+                title={product.title}
+                price={product.price}
+              />
+            ))
+          )}
+          <p id={style.total}>
+            <strong>Total:</strong> {cartProducts.length === 0 ? 0 : total}$
+          </p>
         </Container>
         <Container>
           <h4>
@@ -60,25 +101,50 @@ function LargeModal(props) {
           <Form id={style.order_form}>
             <Form.Group className="mb-2" controlId="formBasicName">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter name" />
+              <Form.Control
+                type="text"
+                placeholder="Enter name"
+                onBlur={onNameHandler}
+              />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicSurname">
               <Form.Label>Surname</Form.Label>
-              <Form.Control type="text" placeholder="Enter surname" />
+              <Form.Control
+                type="text"
+                placeholder="Enter surname"
+                onBlur={onSurnameHandler}
+              />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicNumber">
               <Form.Label>Phone number</Form.Label>
-              <Form.Control type="text" placeholder="Enter phone number" />
+              <Form.Control
+                type="text"
+                placeholder="Enter phone number"
+                onBlur={onNumberHandler}
+              />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicCity">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" placeholder="Enter city" />
+              <Form.Control
+                type="text"
+                placeholder="Enter city"
+                onBlur={onCityHandler}
+              />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicAddress">
               <Form.Label>Address</Form.Label>
-              <Form.Control type="text" placeholder="Enter address" />
+              <Form.Control
+                type="text"
+                placeholder="Enter address"
+                onBlur={onAddressHandler}
+              />
             </Form.Group>
-            <Button className="mt-2" variant="secondary" type="submit">
+            <Button
+              onClick={onOrderHandler}
+              className="mt-2"
+              variant="secondary"
+              type="submit"
+            >
               PLACE ORDER
             </Button>
           </Form>

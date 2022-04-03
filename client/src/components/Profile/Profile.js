@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../Profile/Profile.module.css";
 import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import EachOrder from "./EachOrder/EachOrder";
 function Profile() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/orders")
+      .then((res) => setOrders(res.data));
+  }, []);
+
+  console.log(orders);
   return (
     <div className={style.profile_container}>
       <div className={style.user_info}>
@@ -27,60 +38,15 @@ function Profile() {
         <Card className={style.cart_container}>
           <Card.Header as="h5">Orders</Card.Header>
           <Card.Body>
-            <div className={style.cart_item}>
-              <div className={style.cart_item_info}>
-                <Card.Text>
-                  <strong>Order #:</strong>
-                </Card.Text>
-                <Card.Text>
-                  <strong>Date:</strong>{" "}
-                </Card.Text>
-                <Card.Text>
-                  <strong>Total:</strong> 2000$
-                </Card.Text>
-              </div>
-              <Button variant="secondary">
-                <Link className={style.link} to="/invoice/1">
-                  Details
-                </Link>
-              </Button>
-            </div>
-            <div className={style.cart_item}>
-              <div className={style.cart_item_info}>
-                <Card.Text>
-                  <strong>Order #:</strong>
-                </Card.Text>
-                <Card.Text>
-                  <strong>Date:</strong>{" "}
-                </Card.Text>
-                <Card.Text>
-                  <strong>Total:</strong> 2000$
-                </Card.Text>
-              </div>
-              <Button variant="secondary">
-                <Link className={style.link} to="/invoice/1">
-                  Details
-                </Link>
-              </Button>
-            </div>
-            <div className={style.cart_item}>
-              <div className={style.cart_item_info}>
-                <Card.Text>
-                  <strong>Order #:</strong> 315
-                </Card.Text>
-                <Card.Text>
-                  <strong>Date:</strong> 20.20.2022g
-                </Card.Text>
-                <Card.Text>
-                  <strong>Total:</strong> 2000$
-                </Card.Text>
-              </div>
-              <Button variant="secondary">
-                <Link className={style.link} to="/invoice/1">
-                  Details
-                </Link>
-              </Button>
-            </div>
+            {orders.map((order) => (
+              <EachOrder
+                key={order._id}
+                id={order._id}
+                number={order.number}
+                date={order.date.split("T")[0]}
+                total={order.total}
+              />
+            ))}
           </Card.Body>
         </Card>
       </div>

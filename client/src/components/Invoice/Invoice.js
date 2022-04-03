@@ -1,7 +1,21 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import style from "../Invoice/Invoice.module.css";
 
 function Invoice() {
+  const [invoiceId, setInvoiceId] = useState(
+    window.location.pathname.split("/")[2]
+  );
+  const [invoice, setInvoice] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/orders/${invoiceId}`)
+      .then((res) => setInvoice(res.data));
+  }, []);
+
+  console.log(invoice);
+
   return (
     <div className={style.invoice_box}>
       <table cellPadding="0" cellSpacing="0">
@@ -14,9 +28,9 @@ function Invoice() {
                 </td>
 
                 <td id={style.invoice_info}>
-                  <strong>Invoice #:</strong> 123
+                  <strong>Invoice #:</strong> {invoice.number}
                   <br />
-                  <strong>Created:</strong> January 1, 2015
+                  <strong>Created:</strong> {invoice.date}
                 </td>
               </tr>
             </table>
@@ -36,11 +50,11 @@ function Invoice() {
                 </td>
 
                 <td>
-                  Acme Corp.
+                  {invoice.name}
                   <br />
-                  John Doe
+                  {invoice.surname}
                   <br />
-                  john@example.com
+                  {invoice.city}
                 </td>
               </tr>
             </table>
@@ -54,15 +68,15 @@ function Invoice() {
         </tr>
 
         <tr className={style.item}>
-          <td>PC</td>
+          <td>Computer</td>
 
-          <td>$2000.00</td>
+          <td>${invoice.total}</td>
         </tr>
 
         <tr className={style.total}>
           <td></td>
 
-          <td>Total: $2000.00</td>
+          <td>Total: ${invoice.total}</td>
         </tr>
       </table>
     </div>
