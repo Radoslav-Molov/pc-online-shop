@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 const product = require("../../models/Product");
 
@@ -11,7 +12,7 @@ router.get("/", (req, res) => {
 });
 
 // route POST api/products
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
   const newProduct = new Product({
     title: req.body.title,
     case: req.body.case,
@@ -37,7 +38,7 @@ router.delete("/:id", (req, res) => {
 });
 
 //route GET one product
-router.get("/:id", (req, res) => {
+router.get("/:id", auth, (req, res) => {
   Product.findById(req.params.id).then((product) => res.json(product));
 });
 

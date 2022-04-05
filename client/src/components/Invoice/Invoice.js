@@ -42,6 +42,8 @@ function Invoice() {
             <table>
               <tr>
                 <td>
+                  Dealer Info:
+                  <br />
                   ComputeYourself
                   <br />
                   Sofia
@@ -50,6 +52,8 @@ function Invoice() {
                 </td>
 
                 <td>
+                  Client Info:
+                  <br />
                   {invoice.name}
                   <br />
                   {invoice.surname}

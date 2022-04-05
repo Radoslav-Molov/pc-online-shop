@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "../Profile/Profile.module.css";
-import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
 import EachOrder from "./EachOrder/EachOrder";
 function Profile() {

@@ -13,7 +13,6 @@ function LargeModal(props) {
   const [address, setAddress] = useState("[]");
   let [total, setTotal] = useState(0);
   let [orderNumber, setOrderNumber] = useState(0);
-  const [productNames, setProductNames] = useState([]);
 
   const onNameHandler = (e) => {
     setName(e.target.value);

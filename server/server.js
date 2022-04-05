@@ -1,20 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const cors = require("cors");
+const config = require("config");
 
 const products = require("./routes/api/products");
 const feedbacks = require("./routes/api/feedbacks");
 const orders = require("./routes/api/orders");
 const cart = require("./routes/api/cart");
+const users = require("./routes/api/users");
+const auth = require("./routes/api/auth");
 
 const app = express();
 
 app.use(cors());
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-const db = require("./config/keys").mongoURI;
+const db = config.get("mongoURI");
 
 mongoose
   .connect(db)
@@ -25,6 +28,8 @@ app.use("/api/products", products);
 app.use("/api/feedbacks", feedbacks);
 app.use("/api/cart", cart);
 app.use("/api/orders", orders);
+app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 const port = process.env.PORT || 5000;
 
