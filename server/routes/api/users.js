@@ -6,6 +6,13 @@ const jwt = require("jsonwebtoken");
 
 const user = require("../../models/User");
 
+//roter GET api/users
+router.get("/", (req, res) => {
+  User.find()
+    // .sort({data: -1})
+    .then((users) => res.json(users));
+});
+
 // route POST api/users
 router.post("/", (req, res) => {
   const { name, surname, email, password } = req.body;

@@ -9,6 +9,10 @@ import LargeModal from "../LargeModal/LargeModal";
 function Navigation() {
   const [modalShow, setModalShow] = useState(false);
 
+  const onLogoutHandler = (e) => {
+    localStorage.removeItem("token");
+  };
+
   return (
     <Navbar
       collapseOnSelect
@@ -61,6 +65,11 @@ function Navigation() {
           />
           <Nav>
             <Nav.Link className="display-11">
+              <Link className={style.anchor} to="/admin">
+                Admin
+              </Link>
+            </Nav.Link>
+            <Nav.Link className="display-11">
               <Link className={style.anchor} to="/login">
                 Login
               </Link>
@@ -76,7 +85,9 @@ function Navigation() {
               </Link>
             </Nav.Link>
 
-            <Button id={style.logout_btn}>Logout</Button>
+            <Button id={style.logout_btn} onClick={onLogoutHandler}>
+              Logout
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

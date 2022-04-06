@@ -11,7 +11,7 @@
   margin-top: 90px;
 }
 
-#formEmail {
+.formEmail {
   width: 50%;
   margin: auto;
   padding: 10px;
@@ -22,12 +22,12 @@
   text-decoration: none;
 }
 
-#login_title{
+#login_title {
   margin-bottom: 30px;
   font-style: inherit;
 }
 
 div > label {
   font-weight: 500;
-  margin: 7px
+  margin: 7px;
 }

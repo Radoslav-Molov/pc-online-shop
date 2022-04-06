@@ -22,14 +22,6 @@
   color: rgb(211, 2, 2);
 }
 
-h4 {
-  text-align: center;
-  border-bottom: 1px solid lightgray;
-  width: 40%;
-  margin: auto;
-  margin-bottom: 30px;
-}
-
 #order_form {
   margin: auto;
   width: 70%;

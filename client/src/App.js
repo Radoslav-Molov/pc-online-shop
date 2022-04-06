@@ -12,8 +12,21 @@ import Configurator from "./components/Configurator/Configurator";
 import Invoice from "./components/Invoice/Invoice";
 import About from "./components/About/About";
 import Create from "./components/Create/Create";
+import { useEffect, useState } from "react";
+import Admin from "./components/Admin/Admin";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(undefined);
+
+  setTimeout(() => {
+    if (localStorage.getItem("token") !== undefined) {
+      setIsLoggedIn(true);
+    }
+  }, 1000);
+
+  // console.log(user);
+
   return (
     <div className="App">
       <Nav />
@@ -28,6 +41,7 @@ function App() {
         <Route path="/invoice/:id" element={<Invoice />} />
         <Route path="/create" element={<Create />} />
         <Route path="/about" element={<About />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       <Footer />
     </div>
