@@ -6,11 +6,11 @@ import EachProduct from "./EachProduct/EachProduct";
 
 function LargeModal(props) {
   const [cartProducts, setCartProducts] = useState([]);
-  const [name, setName] = useState("[]");
-  const [surname, setSurname] = useState("[]");
-  const [number, setNumber] = useState("[]");
-  const [city, setCity] = useState("[]");
-  const [address, setAddress] = useState("[]");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [number, setNumber] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
   let [total, setTotal] = useState(0);
   let [orderNumber, setOrderNumber] = useState(0);
 
@@ -38,7 +38,7 @@ function LargeModal(props) {
     axios
       .get("http://localhost:5000/api/cart")
       .then((res) => setCartProducts(res.data));
-  }, [cartProducts]);
+  }, []);
 
   useEffect(() => {
     cartProducts.forEach((product) => {

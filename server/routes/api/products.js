@@ -38,8 +38,11 @@ router.delete("/:id", (req, res) => {
 });
 
 //route GET one product
-router.get("/:id", auth, (req, res) => {
-  Product.findById(req.params.id).then((product) => res.json(product));
+router.get("/:id", (req, res) => {
+  Product.findById(req.params.id).then((product) => {
+    console.log(product);
+    res.json(product);
+  });
 });
 
 module.exports = router;

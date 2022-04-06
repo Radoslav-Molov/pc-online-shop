@@ -1,17 +1,19 @@
 #products_wrapper {
-  width: 40%;
+  width: 45%;
   margin: auto;
   border: 1px solid rgb(176, 175, 175);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   border-radius: 20px;
   height: 100%;
   overflow: scroll;
+  background-color: white;
 }
 
 #users_wrapper {
   width: 50%;
   margin: auto;
   height: 100%;
+  background-color: white;
 }
 
 #admin_panel {
@@ -30,6 +32,7 @@
   border-radius: 10px;
   height: 290px;
   overflow: scroll;
+  background-color: white;
 }
 
 #users_container {

@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import style from "../Login/Login.module.css";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ onLogin, onLoginUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
   const onEmailHandler = (e) => {
     setEmail(e.target.value);
@@ -26,13 +27,14 @@ function Login() {
           email: email,
           password: password,
         })
-        .then((res) => setUser(res.data));
+        .then((res) => {
+          onLogin(true);
+          onLoginUser(res.data.user);
+          localStorage.setItem("token", res.data.token);
+          navigate("/");
+        });
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem("token", user.token);
-  }, [user]);
 
   return (
     <div className={style.login_container}>

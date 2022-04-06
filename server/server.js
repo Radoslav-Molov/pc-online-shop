@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 // const bodyParser = require("body-parser");
 const cors = require("cors");
-const config = require("config");
+// const config = require("config");
 
 const products = require("./routes/api/products");
 const feedbacks = require("./routes/api/feedbacks");
@@ -17,7 +17,9 @@ app.use(cors());
 
 app.use(express.json());
 
-const db = config.get("mongoURI");
+// const db = config.get("mongoURI");
+const db =
+  "mongodb+srv://rado:123123123@compute-yourself.zp8kc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose
   .connect(db)

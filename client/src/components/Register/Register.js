@@ -3,13 +3,14 @@ import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import style from "../Register/Register.module.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userDetails, setUserDetails] = useState("");
+  const navigate = useNavigate();
 
   const onNameHandler = (e) => {
     setName(e.target.value);
@@ -38,7 +39,9 @@ function Register() {
           email: email,
           password: password,
         })
-        .then((res) => setUserDetails(res.data))
+        .then((res) => {
+          navigate("/login");
+        })
         .catch((err) => console.log(err));
     }
   };

@@ -18,15 +18,13 @@ function Details() {
   const [productInfo, setProductInfo] = useState("");
 
   useEffect(() => {
-    // setProductId(window.location.pathname.split("/")[2]);
-
     axios
       .get(`http://localhost:5000/api/products/${productId}`)
-      .then((res) => setProductInfo(res.data));
-  }, []);
+      .then((res) => setProductInfo(res.data))
+      .catch((err) => console.log(err));
+  }, [productId]);
 
   const onOrderHandler = () => {
-    console.log("ue");
     axios
       .post("http://localhost:5000/api/cart", {
         image: productInfo.image,
@@ -85,9 +83,9 @@ function Details() {
                   className={style.cart_btn}
                   variant="secondary"
                 >
-                  <Link className={style.anchor} to="/profile">
-                    Add to cart
-                  </Link>
+                  {/* <Link className={style.anchor} to="/profile"> */}
+                  Add to cart
+                  {/* </Link> */}
                 </Button>
               </Card.Body>
             </Col>

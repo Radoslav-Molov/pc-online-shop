@@ -14,29 +14,45 @@ import About from "./components/About/About";
 import Create from "./components/Create/Create";
 import { useEffect, useState } from "react";
 import Admin from "./components/Admin/Admin";
+import axios from "axios";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(undefined);
 
-  setTimeout(() => {
-    if (localStorage.getItem("token") !== undefined) {
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") !== "undefined" &&
+      localStorage.getItem("token") !== null
+    ) {
       setIsLoggedIn(true);
-    }
-  }, 1000);
 
-  // console.log(user);
+      let token = localStorage.getItem("token");
+      console.log(token);
+
+      axios
+        .get("http://localhost:5000/api/auth/user", {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
+        .then((res) => setUser(res.data));
+    }
+  }, []);
 
   return (
     <div className="App">
-      <Nav />
+      <Nav user={user} onLogout={setIsLoggedIn} onLogoutUser={setUser} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login onLogin={setIsLoggedIn} onLoginUser={setUser} />}
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/details/:id" element={<Details />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile user={user} />} />
         <Route path="/configurator" element={<Configurator />} />
         <Route path="/invoice/:id" element={<Invoice />} />
         <Route path="/create" element={<Create />} />

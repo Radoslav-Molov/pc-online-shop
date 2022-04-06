@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import style from "../Profile/Profile.module.css";
-import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import axios from "axios";
 import EachOrder from "./EachOrder/EachOrder";
-function Profile() {
+function Profile({ user }) {
   const [orders, setOrders] = useState([]);
+  const [currUser, setCurrUser] = useState("");
+
+  if (user !== null && user !== undefined) {
+    setCurrUser(user);
+  }
 
   useEffect(() => {
     axios
@@ -12,24 +17,18 @@ function Profile() {
       .then((res) => setOrders(res.data));
   }, []);
 
-  console.log(orders);
   return (
     <div className={style.profile_container}>
       <div className={style.user_info}>
         <Card>
           <Card.Img
             variant="top"
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+            src="https://media.istockphoto.com/vectors/user-icon-people-icon-isolated-on-white-background-vector-vector-id1210939712?k=20&m=1210939712&s=612x612&w=0&h=xJqEPQnMiNofprbLXWdEtJQ75QL79lQ5N76J4JOdTIM="
           />
           <Card.Body>
-            <Card.Title>Radoslav</Card.Title>
-            <Card.Title>Molov</Card.Title>
+            <Card.Title>{currUser.name}</Card.Title>
+            <Card.Title>{currUser.surname}</Card.Title>
           </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroupItem>
-              <strong>City:</strong> Smolyan
-            </ListGroupItem>
-          </ListGroup>
           <Card.Body></Card.Body>
         </Card>
       </div>
