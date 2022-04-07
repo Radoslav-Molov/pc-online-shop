@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-// import { TileLayer, MapContainer, Marker, Popup } from "react-leaflet";
+import { TileLayer, MapContainer, Marker, Popup } from "react-leaflet";
 import map from "./map";
-// import "leaflet/dist/leaflet.css";
+import "leaflet/dist/leaflet.css";
 import style from "../About/About.module.css";
-// import L from "leaflet";
+import L from "leaflet";
 
 function About() {
-  // const [center, setCenter] = useState({ lat: "42.677679", lng: "23.261483" });
-  // const ZOOM_LEVEL = 9;
+  const [center, setCenter] = useState({ lat: "42.677679", lng: "23.261483" });
+  const ZOOM_LEVEL = 9;
 
-  // const markerIcon = new L.Icon({
-  //   iconUrl:
-  //     "https://toppng.com/uploads/preview/map-point-google-map-marker-gif-11562858751s4qufnxuml.png",
-  //   iconSize: [15, 15],
-  // });
+  const markerIcon = new L.Icon({
+    iconUrl:
+      "https://toppng.com/uploads/preview/map-point-google-map-marker-gif-11562858751s4qufnxuml.png",
+    iconSize: [15, 15],
+  });
 
   return (
     <div>
@@ -30,7 +30,7 @@ function About() {
         </p>
       </div>
       {/* <h4>Address:</h4> */}
-      {/* <MapContainer
+      <MapContainer
         center={center}
         zoom={ZOOM_LEVEL}
         id={style.leaflet_container}
@@ -45,7 +45,7 @@ function About() {
             <p>Marker</p>
           </Popup>
         </Marker>
-      </MapContainer> */}
+      </MapContainer>
     </div>
   );
 }

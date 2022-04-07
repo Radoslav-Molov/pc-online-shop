@@ -28,7 +28,6 @@ function App() {
       setIsLoggedIn(true);
 
       let token = localStorage.getItem("token");
-      console.log(token);
 
       axios
         .get("http://localhost:5000/api/auth/user", {
@@ -53,7 +52,7 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/profile" element={<Profile user={user} />} />
-        <Route path="/configurator" element={<Configurator />} />
+        <Route path="/configurator" element={<Configurator user={user} />} />
         <Route path="/invoice/:id" element={<Invoice />} />
         <Route path="/create" element={<Create />} />
         <Route path="/about" element={<About />} />

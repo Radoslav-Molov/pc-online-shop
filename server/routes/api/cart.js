@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
 // route POST api/cart
 router.post("/", (req, res) => {
   const newProduct = new Cart({
+    uid: req.body.uid,
     image: req.body.image,
     title: req.body.title,
     price: req.body.price,

@@ -28,7 +28,7 @@ function Invoice() {
                 </td>
 
                 <td id={style.invoice_info}>
-                  <strong>Invoice #:</strong> {invoice.number}
+                  <strong>Invoice #:</strong> {invoice.order}
                   <br />
                   <strong>Created:</strong> {invoice.date}
                 </td>
@@ -54,9 +54,9 @@ function Invoice() {
                 <td>
                   Client Info:
                   <br />
-                  {invoice.name}
+                  {invoice.name} {invoice.surname}
                   <br />
-                  {invoice.surname}
+                  {invoice.number}
                   <br />
                   {invoice.city}
                 </td>

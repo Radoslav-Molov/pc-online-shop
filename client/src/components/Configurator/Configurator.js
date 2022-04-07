@@ -3,7 +3,15 @@ import React, { useEffect, useState } from "react";
 import { Form, Image, Button, ListGroup } from "react-bootstrap";
 import style from "../Configurator/Configurator.module.css";
 
-function Configurator() {
+function Configurator({ user }) {
+  const [currUser, setCurrUser] = useState("");
+
+  useEffect(() => {
+    if (user !== null && user !== undefined) {
+      setCurrUser(user);
+    }
+  }, []);
+
   const [selectedCaseTitle, setSelectedCaseTitle] = useState(
     "Phanteks Eclipse P360A"
   );
@@ -77,15 +85,9 @@ function Configurator() {
 
   const onOrderHandler = () => {
     axios
-      .post("http://localhost:5000/api/products", {
+      .post("http://localhost:5000/api/cart", {
+        uid: currUser._id,
         title: "Custom build",
-        case: setup.case,
-        motherboard: setup.motherboard,
-        cpu: setup.cpu,
-        ram: setup.ram,
-        storage: setup.storage,
-        gpu: setup.gpu,
-        psu: setup.psu,
         image: selectedCaseImg,
         price: total,
       })
@@ -331,7 +333,7 @@ function Configurator() {
                           value="220"
                           className={style.input}
                         ></input>
-                        <span>ASRock X570 Phantom Gaming</span>
+                        <span>ASRock X570 Phantom</span>
                         <span className={style.span_price}>+ 220$</span>
                       </button>
                       <button
@@ -345,7 +347,7 @@ function Configurator() {
                           value="440"
                           className={style.input}
                         ></input>
-                        <span>Asus ROG Crosshair VIII Dark Hero</span>
+                        <span>Asus ROG Crosshair VIII</span>
                         <span className={style.span_price}>+ 440$</span>
                       </button>
                       <button
@@ -359,7 +361,7 @@ function Configurator() {
                           value="238"
                           className={style.input}
                         ></input>
-                        <span>MSI MPG X570 Gaming Pro</span>
+                        <span>MSI MPG X570 Pro</span>
                         <span className={style.span_price}>+ 238$</span>
                       </button>
                       <button

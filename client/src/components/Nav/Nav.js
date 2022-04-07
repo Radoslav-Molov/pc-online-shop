@@ -5,9 +5,11 @@ import style from "../Nav/Nav.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
 import LargeModal from "../LargeModal/LargeModal";
+import Create from "../CreateProducts/Create";
 
 function Navigation({ onLogout, onLogoutUser, user }) {
   const [modalShow, setModalShow] = useState(false);
+  const [modalCreateShow, setModalCreateShow] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [currUser, setCurrUser] = useState("");
 
@@ -22,16 +24,11 @@ function Navigation({ onLogout, onLogoutUser, user }) {
   useEffect(() => {
     if (user !== null && user !== undefined) {
       setCurrUser(user);
-    }
-
-    if (currUser !== null && currUser !== undefined) {
-      if (currUser.email === "admin@gmail.com") {
+      if (user.email === "admin@gmail.com") {
         setIsAdmin(true);
       }
     }
   }, [user]);
-
-  console.log(currUser);
 
   return (
     <Navbar
@@ -78,7 +75,12 @@ function Navigation({ onLogout, onLogoutUser, user }) {
             ""
           )}
           {isAdmin ? (
-            <Button variant="link">
+            <Button
+              variant="link"
+              onClick={() => {
+                setModalCreateShow(true);
+              }}
+            >
               <FontAwesomeIcon icon={faPlus} id={style.create_icon} />
               <Link to="/create"></Link>
             </Button>
@@ -87,9 +89,16 @@ function Navigation({ onLogout, onLogoutUser, user }) {
           )}
 
           <LargeModal
+            user={user}
             show={modalShow}
             onHide={() => {
               setModalShow(false);
+            }}
+          />
+          <Create
+            show={modalCreateShow}
+            onHide={() => {
+              setModalCreateShow(false);
             }}
           />
           <Nav>

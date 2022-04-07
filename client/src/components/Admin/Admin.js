@@ -56,6 +56,7 @@ function Admin() {
           {users.map((user) => (
             <Users
               key={user._id}
+              id={user._id}
               name={user.name}
               surname={user.surname}
               email={user.email}

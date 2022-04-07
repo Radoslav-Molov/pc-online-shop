@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 });
 
 // route POST api/products
-router.post("/", auth, (req, res) => {
+router.post("/", (req, res) => {
   const newProduct = new Product({
     title: req.body.title,
     case: req.body.case,
@@ -40,7 +40,6 @@ router.delete("/:id", (req, res) => {
 //route GET one product
 router.get("/:id", (req, res) => {
   Product.findById(req.params.id).then((product) => {
-    console.log(product);
     res.json(product);
   });
 });

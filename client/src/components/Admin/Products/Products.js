@@ -1,8 +1,16 @@
+import axios from "axios";
 import React from "react";
 import { Button } from "react-bootstrap";
 import style from "../Products/Products.module.css";
 
 function Products(props) {
+  const onDeleteHandler = () => {
+    axios
+      .delete(`http://localhost:5000/api/products/${props.id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div id={style.product_list}>
       <img className={style.list_image} src={props.image} alt="productImg" />
@@ -17,7 +25,11 @@ function Products(props) {
           {" "}
           Edit
         </Button>
-        <Button className={style.action_btn} variant="secondary">
+        <Button
+          className={style.action_btn}
+          variant="secondary"
+          onClick={onDeleteHandler}
+        >
           {" "}
           Delete
         </Button>

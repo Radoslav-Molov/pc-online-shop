@@ -13,6 +13,8 @@ function LargeModal(props) {
   const [address, setAddress] = useState("");
   let [total, setTotal] = useState(0);
   let [orderNumber, setOrderNumber] = useState(0);
+  const [currUser, setCurrUser] = useState("");
+  let filtered = [];
 
   const onNameHandler = (e) => {
     setName(e.target.value);
@@ -35,9 +37,14 @@ function LargeModal(props) {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/cart")
-      .then((res) => setCartProducts(res.data));
+    if (props.user !== null && props.user !== undefined) {
+      setCurrUser(props.user);
+    }
+
+    axios.get("http://localhost:5000/api/cart").then((res) => {
+      filtered = res.data.filter((order) => order.uid === currUser._id);
+      setCartProducts(filtered);
+    });
   }, []);
 
   useEffect(() => {
@@ -56,6 +63,7 @@ function LargeModal(props) {
 
     axios
       .post("http://localhost:5000/api/orders", {
+        uid: currUser._id,
         order: orderNumber,
         total: total,
         name: name,
@@ -64,7 +72,8 @@ function LargeModal(props) {
         city: city,
         address: address,
       })
-      .then((res) => res.json());
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (

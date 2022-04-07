@@ -13,7 +13,7 @@ function EachProduct(props) {
 
   return (
     <Row className={style.cart_item}>
-      <Col xs={6} md={4}>
+      <Col xs={6} md={3}>
         <img className={style.modal_img} src={props.image} alt="itemImg"></img>
         {/* .col-xs-6 .col-md-4 */}
       </Col>
@@ -21,7 +21,7 @@ function EachProduct(props) {
         {props.title}
         {/* .col-xs-6 .col-md-4 */}
       </Col>
-      <Col className={style.cart_item_text} xs={5} md={2}>
+      <Col className={style.cart_item_text} xs={5} md={3}>
         Price: {props.price}$
       </Col>
       <Col className={style.cart_item_text} xs={3} md={1}>

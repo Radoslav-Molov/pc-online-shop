@@ -3,19 +3,29 @@ import style from "../Profile/Profile.module.css";
 import { Card } from "react-bootstrap";
 import axios from "axios";
 import EachOrder from "./EachOrder/EachOrder";
+
 function Profile({ user }) {
   const [orders, setOrders] = useState([]);
   const [currUser, setCurrUser] = useState("");
 
-  if (user !== null && user !== undefined) {
-    setCurrUser(user);
-  }
-
   useEffect(() => {
+    if (user !== null && user !== undefined) {
+      setCurrUser(user);
+    }
+
+    let filtered = [];
+
     axios
       .get("http://localhost:5000/api/orders")
-      .then((res) => setOrders(res.data));
+      .then((res) => {
+        setOrders(res.data);
+        filtered = res.data.filter((order) => order.uid === currUser.id);
+        setOrders(filtered);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  console.log(currUser._id);
 
   return (
     <div className={style.profile_container}>
@@ -29,22 +39,25 @@ function Profile({ user }) {
             <Card.Title>{currUser.name}</Card.Title>
             <Card.Title>{currUser.surname}</Card.Title>
           </Card.Body>
-          <Card.Body></Card.Body>
         </Card>
       </div>
       <div className={style.cart}>
         <Card className={style.cart_container}>
           <Card.Header as="h5">Orders</Card.Header>
           <Card.Body>
-            {orders.map((order) => (
-              <EachOrder
-                key={order._id}
-                id={order._id}
-                number={order.number}
-                date={order.date.split("T")[0]}
-                total={order.total}
-              />
-            ))}
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <EachOrder
+                  key={order._id}
+                  id={order._id}
+                  number={order.number}
+                  date={order.date.split("T")[0]}
+                  total={order.total}
+                />
+              ))
+            ) : (
+              <h3>No order history</h3>
+            )}
           </Card.Body>
         </Card>
       </div>

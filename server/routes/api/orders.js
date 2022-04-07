@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
 // route POST api/order
 router.post("/", (req, res) => {
   const newOrder = new Order({
+    uid: req.body.uid,
     order: req.body.order,
     total: req.body.total,
     name: req.body.name,
