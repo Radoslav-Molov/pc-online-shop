@@ -7,11 +7,11 @@ import Register from "./components/Register/Register";
 import Catalog from "./components/Catalog/Catalog";
 import Details from "./components/Details/Details";
 import Profile from "./components/Profile/Profile";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Configurator from "./components/Configurator/Configurator";
 import Invoice from "./components/Invoice/Invoice";
 import About from "./components/About/About";
-import Create from "./components/Create/Create";
+import Create from "./components/CreateProducts/Create";
 import { useEffect, useState } from "react";
 import Admin from "./components/Admin/Admin";
 import { UserContext } from "./UserContext";
@@ -85,15 +85,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/invoice/:id" element={<Invoice />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </UserContext.Provider>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/invoice/:id" element={<Invoice />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+
       <Footer />
     </div>
   );

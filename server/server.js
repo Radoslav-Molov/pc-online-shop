@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 // const config = require("config");
 
+const middleware = require("./middleware/auth");
 const products = require("./routes/api/products");
 const feedbacks = require("./routes/api/feedbacks");
 const orders = require("./routes/api/orders");
@@ -14,6 +15,7 @@ const auth = require("./routes/api/auth");
 const app = express();
 
 app.use(cors());
+app.use(middleware);
 
 app.use(express.json());
 

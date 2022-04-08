@@ -12,8 +12,14 @@ function Profile({}) {
   useEffect(() => {
     let filtered = [];
 
+    let token = localStorage.getItem("token");
+
     axios
-      .get("http://localhost:5000/api/orders")
+      .get("http://localhost:5000/api/orders", {
+        headers: {
+          "x-auth-token": token,
+        },
+      })
       .then((res) => {
         setOrders(res.data);
         filtered = res.data.filter((order) => order.uid === user.id);

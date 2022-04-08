@@ -43,9 +43,16 @@ function LargeModal(props) {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/cart").then((res) => {
-      setCartProducts(res.data);
-    });
+    let token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:5000/api/cart", {
+        headers: {
+          "x-auth-token": token,
+        },
+      })
+      .then((res) => {
+        setCartProducts(res.data);
+      });
   }, [changes, props.show]);
 
   useEffect(() => {

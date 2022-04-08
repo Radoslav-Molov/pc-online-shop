@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal, Container, Button, Form } from "react-bootstrap";
-import style from "../Create/Create.module.css";
+import style from "../CreateProducts/Create.module.css";
 
 function Create(props) {
   const [title, setTitle] = useState("");
@@ -15,6 +15,8 @@ function Create(props) {
   const [image, setImage] = useState("");
   const [reviewLink, setReviewLink] = useState("");
   const [price, setPrice] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
+  const [editProduct, setEditProduct] = useState("");
 
   const onTitleHandler = (e) => {
     setTitle(e.target.value);
@@ -50,33 +52,77 @@ function Create(props) {
     setPrice(e.target.value);
   };
 
+  useEffect(() => {
+    if (props.edit === "true") {
+      setIsEdit(true);
+
+      axios
+        .get(`http://localhost:5000/api/products/${props.id}`)
+        .then((res) => {
+          setEditProduct(res.data);
+          // setTitle(res.data.title),
+          //   setCaseName(res.data.caseName),
+          //   setMotherboard(res.data.motherboard),
+          //   setCpu(res.data.cpu),
+          //   setRam(res.data.ram),
+          //   setStorage(res.data.storage),
+          //   setGpu(res.data.gpu),
+          //   setPsu(res.data.psu),
+          //   setImage(res.data.image),
+          //   setReviewLink(res.data.reviewLink),
+          //   setPrice(res.data.price);
+        });
+    } else {
+      setIsEdit(false);
+    }
+  }, [props.edit]);
+
   const onAddHandler = (e) => {
     e.preventDefault();
-
-    axios
-      .post("http://localhost:5000/api/products", {
-        title: title,
-        case: caseName,
-        motherboard: motherboard,
-        cpu: cpu,
-        ram: ram,
-        storage: storage,
-        gpu: gpu,
-        psu: psu,
-        image: image,
-        reviewLink: reviewLink,
-        price: price,
-      })
-      .then((res) => console.log(res));
-
-    console.log("tes");
+    if (isEdit) {
+      axios
+        .patch(`http://localhost:5000/api/products/${props.id}`, {
+          title: editProduct.title,
+          case: editProduct.case,
+          motherboard: editProduct.motherboard,
+          cpu: editProduct.cpu,
+          ram: editProduct.ram,
+          storage: editProduct.storage,
+          gpu: editProduct.gpu,
+          psu: editProduct.psu,
+          image: editProduct.image,
+          reviewLink: editProduct.reviewLink,
+          price: editProduct.price,
+        })
+        .then((res) => console.log(res));
+    } else {
+      axios
+        .post("http://localhost:5000/api/products", {
+          title: title,
+          case: caseName,
+          motherboard: motherboard,
+          cpu: cpu,
+          ram: ram,
+          storage: storage,
+          gpu: gpu,
+          psu: psu,
+          image: image,
+          reviewLink: reviewLink,
+          price: price,
+        })
+        .then((res) => console.log(res));
+    }
   };
 
   return (
     <Modal size="lg" {...props} aria-labelledby="example-modal-sizes-title-lg">
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          <strong>Add new product</strong>
+          {isEdit ? (
+            <strong>Edit product</strong>
+          ) : (
+            <strong>Add new product</strong>
+          )}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -91,6 +137,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter title"
                 onBlur={onTitleHandler}
+                defaultValue={isEdit ? editProduct.title : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicCase">
@@ -99,6 +146,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter case model"
                 onBlur={onCaseHandler}
+                defaultValue={isEdit ? editProduct.case : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicMotherboard">
@@ -107,6 +155,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter motherboard model"
                 onBlur={onMotherboardHandler}
+                defaultValue={isEdit ? editProduct.motherboard : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicCpu">
@@ -115,6 +164,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter CPU model"
                 onBlur={onCpuHandler}
+                defaultValue={isEdit ? editProduct.cpu : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicRAM">
@@ -123,6 +173,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter RAM type"
                 onBlur={onRamHandler}
+                defaultValue={isEdit ? editProduct.ram : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicStorage">
@@ -131,6 +182,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter storage type"
                 onBlur={onStorageHandler}
+                defaultValue={isEdit ? editProduct.storage : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicGPU">
@@ -139,6 +191,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter GPU model"
                 onBlur={onGpuHandler}
+                defaultValue={isEdit ? editProduct.gpu : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicPSU">
@@ -147,6 +200,7 @@ function Create(props) {
                 type="text"
                 placeholder="Enter PSU model"
                 onBlur={onPsuHandler}
+                defaultValue={isEdit ? editProduct.psu : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicImage">
@@ -155,6 +209,7 @@ function Create(props) {
                 type="link"
                 placeholder="Enter thumbnail link"
                 onBlur={onImageHandler}
+                defaultValue={isEdit ? editProduct.image : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicYT">
@@ -163,6 +218,7 @@ function Create(props) {
                 type="link"
                 placeholder="Enter Youtube review link"
                 onBlur={onYoutubeHandler}
+                defaultValue={isEdit ? editProduct.reviewLink : ""}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicPrice">
@@ -171,6 +227,7 @@ function Create(props) {
                 type="number"
                 placeholder="Set price"
                 onBlur={onPriceHandler}
+                defaultValue={isEdit ? editProduct.price : ""}
               />
             </Form.Group>
             <Button
@@ -179,7 +236,7 @@ function Create(props) {
               variant="secondary"
               type="submit"
             >
-              PLACE ORDER
+              {isEdit ? "EDIT" : "PLACE ORDER"}
             </Button>
           </Form>
         </Container>

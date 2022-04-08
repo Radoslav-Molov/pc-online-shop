@@ -20,7 +20,7 @@ function Admin() {
       .then((res) => setUsers(res.data));
 
     axios
-      .get("http://localhost:5000/api/orders")
+      .get("http://localhost:5000/api/orders/admin")
       .then((res) => setOrders(res.data));
   }, []);
 

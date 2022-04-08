@@ -5,9 +5,9 @@ const cartProduct = require("../../models/Cart");
 
 // route GET api/cart
 router.get("/", (req, res) => {
-  Cart.find()
-    // .sort({data: -1})
-    .then((cart) => res.json(cart));
+  Cart.find({ uid: req.user.id }).then((cart) => {
+    res.json(cart);
+  });
 });
 
 // route POST api/cart

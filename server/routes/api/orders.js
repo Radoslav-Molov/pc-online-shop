@@ -6,6 +6,13 @@ const order = require("../../models/Order");
 
 // route GET api/order
 router.get("/", (req, res) => {
+  Order.find({ uid: req.user.id })
+    // .sort({data: -1})
+    .then((order) => res.json(order));
+});
+
+// route GET api/order/admin
+router.get("/admin", (req, res) => {
   Order.find()
     // .sort({data: -1})
     .then((order) => res.json(order));
