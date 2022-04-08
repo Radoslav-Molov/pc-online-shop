@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Modal, Container, Button, Form } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Modal, Container, Button, Form, Alert } from "react-bootstrap";
+import { UserContext } from "../../UserContext";
 import style from "../LargeModal/LargeModal.module.css";
 import EachProduct from "./EachProduct/EachProduct";
 
@@ -11,10 +12,11 @@ function LargeModal(props) {
   const [number, setNumber] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
+  const [changes, setChanges] = useState(0);
   let [total, setTotal] = useState(0);
   let [orderNumber, setOrderNumber] = useState(0);
-  const [currUser, setCurrUser] = useState("");
-  let filtered = [];
+  const { user, setUser } = useContext(UserContext);
+  const [show, setShow] = useState(false);
 
   const onNameHandler = (e) => {
     setName(e.target.value);
@@ -36,25 +38,32 @@ function LargeModal(props) {
     setAddress(e.target.value);
   };
 
-  useEffect(() => {
-    if (props.user !== null && props.user !== undefined) {
-      setCurrUser(props.user);
-    }
+  const onProductDelete = () => {
+    setChanges(changes + 1);
+  };
 
+  useEffect(() => {
     axios.get("http://localhost:5000/api/cart").then((res) => {
-      filtered = res.data.filter((order) => order.uid === currUser._id);
-      setCartProducts(filtered);
+      setCartProducts(res.data);
     });
-  }, []);
+  }, [changes, props.show]);
 
   useEffect(() => {
+    let price = 0;
     cartProducts.forEach((product) => {
-      let price = 0;
       price += product.price;
 
       setTotal(price);
     });
   }, [cartProducts]);
+
+  useEffect(() => {
+    if (show) {
+      setTimeout(() => {
+        setShow(false);
+      }, 3000);
+    }
+  }, [show]);
 
   const onOrderHandler = (e) => {
     e.preventDefault();
@@ -63,7 +72,7 @@ function LargeModal(props) {
 
     axios
       .post("http://localhost:5000/api/orders", {
-        uid: currUser._id,
+        uid: user.id,
         order: orderNumber,
         total: total,
         name: name,
@@ -72,7 +81,10 @@ function LargeModal(props) {
         city: city,
         address: address,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        setShow(true);
+        setCartProducts([]);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -84,6 +96,18 @@ function LargeModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {show ? (
+          <Alert
+            className={style.notification}
+            variant="success"
+            onClose={() => setShow(false)}
+            dismissible
+          >
+            <Alert.Heading>Successful order</Alert.Heading>
+          </Alert>
+        ) : (
+          ""
+        )}
         <Container>
           {cartProducts.length === 0 ? (
             <h3 id={style.cart_heading}>No items in cart</h3>
@@ -95,6 +119,7 @@ function LargeModal(props) {
                 image={product.image}
                 title={product.title}
                 price={product.price}
+                onDelete={onProductDelete}
               />
             ))
           )}

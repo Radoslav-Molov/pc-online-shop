@@ -35,7 +35,7 @@ function Footer() {
             <div className="col-md-4 mt-md-0 mt-3">
               <h5 className="text-uppercase">Content</h5>
               <p className={style.text}>
-                Here you can browse through a variety of pc builds.
+                An app where you can browse, build and order a new PC
               </p>
             </div>
 

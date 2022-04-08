@@ -1,16 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Form, Image, Button, ListGroup } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Form, Image, Button, ListGroup, Alert } from "react-bootstrap";
+import { UserContext } from "../../UserContext";
 import style from "../Configurator/Configurator.module.css";
 
-function Configurator({ user }) {
-  const [currUser, setCurrUser] = useState("");
-
-  useEffect(() => {
-    if (user !== null && user !== undefined) {
-      setCurrUser(user);
-    }
-  }, []);
+function Configurator({}) {
+  const { user, setUser } = useContext(UserContext);
+  const [show, setShow] = useState(false);
 
   const [selectedCaseTitle, setSelectedCaseTitle] = useState(
     "Phanteks Eclipse P360A"
@@ -52,7 +48,6 @@ function Configurator({ user }) {
 
   const onSocketSelecthandler = (e) => {
     if (e.target.value === "amd") {
-      console.log("true");
       setIsIntel(false);
     } else {
       setIsIntel(true);
@@ -86,14 +81,22 @@ function Configurator({ user }) {
   const onOrderHandler = () => {
     axios
       .post("http://localhost:5000/api/cart", {
-        uid: currUser._id,
+        uid: user.id,
         title: "Custom build",
         image: selectedCaseImg,
         price: total,
       })
-      .then((res) => console.log(res))
+      .then((res) => setShow(true))
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    if (show) {
+      setTimeout(() => {
+        setShow(false);
+      }, 3000);
+    }
+  }, [show]);
 
   return (
     <div>
@@ -765,6 +768,18 @@ function Configurator({ user }) {
         </div>
       </div>
       <div id={style.price}>
+        {show ? (
+          <Alert
+            className={style.notification}
+            variant="success"
+            onClose={() => setShow(false)}
+            dismissible
+          >
+            <Alert.Heading>Item added to cart!</Alert.Heading>
+          </Alert>
+        ) : (
+          ""
+        )}
         <ListGroup id={style.setupList} variant="flush">
           <h4>Current Setup:</h4>
           <ListGroup.Item>

@@ -83,3 +83,9 @@
 .anchor:hover {
   color: rgb(219, 219, 219);
 }
+
+.notification {
+  width: 20%;
+  height: 50px;
+  float: right;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Nav, Navbar, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import style from "../Nav/Nav.module.css";
@@ -6,26 +6,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
 import LargeModal from "../LargeModal/LargeModal";
 import Create from "../CreateProducts/Create";
+import { UserContext } from "../../UserContext";
+import { useNavigate } from "react-router-dom";
 
-function Navigation({ onLogout, onLogoutUser, user }) {
+function Navigation({}) {
   const [modalShow, setModalShow] = useState(false);
   const [modalCreateShow, setModalCreateShow] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [currUser, setCurrUser] = useState("");
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const onLogoutHandler = (e) => {
     localStorage.removeItem("token");
-    onLogout(false);
-    onLogoutUser(null);
+    setUser(undefined);
     setIsAdmin(false);
-    setCurrUser("");
+    navigate("/");
   };
 
   useEffect(() => {
-    if (user !== null && user !== undefined) {
-      setCurrUser(user);
+    if (user !== undefined) {
       if (user.email === "admin@gmail.com") {
         setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
       }
     }
   }, [user]);
@@ -52,7 +55,7 @@ function Navigation({ onLogout, onLogoutUser, user }) {
                 Catalog
               </Link>{" "}
             </Nav.Link>
-            {currUser ? (
+            {user ? (
               <Nav.Link>
                 <Link className={style.anchor} to="/configurator">
                   Configurator
@@ -62,7 +65,7 @@ function Navigation({ onLogout, onLogoutUser, user }) {
               ""
             )}
           </Nav>
-          {currUser ? (
+          {user ? (
             <Button
               variant="link"
               onClick={() => {
@@ -111,7 +114,7 @@ function Navigation({ onLogout, onLogoutUser, user }) {
             ) : (
               ""
             )}
-            {currUser
+            {user
               ? [
                   <Nav.Link>
                     <Link className={style.anchor} to="/profile">

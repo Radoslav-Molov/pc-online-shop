@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "../Profile/Profile.module.css";
 import { Card } from "react-bootstrap";
 import axios from "axios";
 import EachOrder from "./EachOrder/EachOrder";
+import { UserContext } from "../../UserContext";
 
-function Profile({ user }) {
+function Profile({}) {
   const [orders, setOrders] = useState([]);
-  const [currUser, setCurrUser] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (user !== null && user !== undefined) {
-      setCurrUser(user);
-    }
-
     let filtered = [];
 
     axios
       .get("http://localhost:5000/api/orders")
       .then((res) => {
         setOrders(res.data);
-        filtered = res.data.filter((order) => order.uid === currUser.id);
+        filtered = res.data.filter((order) => order.uid === user.id);
         setOrders(filtered);
       })
       .catch((err) => console.log(err));
   }, []);
-
-  console.log(currUser._id);
 
   return (
     <div className={style.profile_container}>
@@ -36,8 +31,8 @@ function Profile({ user }) {
             src="https://media.istockphoto.com/vectors/user-icon-people-icon-isolated-on-white-background-vector-vector-id1210939712?k=20&m=1210939712&s=612x612&w=0&h=xJqEPQnMiNofprbLXWdEtJQ75QL79lQ5N76J4JOdTIM="
           />
           <Card.Body>
-            <Card.Title>{currUser.name}</Card.Title>
-            <Card.Title>{currUser.surname}</Card.Title>
+            <Card.Title>{user.name}</Card.Title>
+            <Card.Title>{user.surname}</Card.Title>
           </Card.Body>
         </Card>
       </div>

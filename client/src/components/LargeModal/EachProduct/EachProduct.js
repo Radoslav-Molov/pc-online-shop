@@ -7,7 +7,10 @@ function EachProduct(props) {
   const onProductRemoveHandler = () => {
     axios
       .delete(`http://localhost:5000/api/cart/${props.id}`)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        props.onDelete();
+      })
       .catch((err) => console.log(err));
   };
 

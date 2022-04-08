@@ -160,3 +160,9 @@ span {
   float: right;
   font-weight: 600;
 }
+
+.notification {
+  width: 20%;
+  height: 60px;
+  margin: auto;
+}
