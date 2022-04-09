@@ -38,22 +38,29 @@ router.delete("/:id", (req, res) => {
 });
 
 //route PATCH one product
-router.patch("/:id", (req, res) => {
-  const newProduct = new Product({
-    title: req.body.title,
-    case: req.body.case,
-    motherboard: req.body.motherboard,
-    cpu: req.body.cpu,
-    ram: req.body.ram,
-    storage: req.body.storage,
-    gpu: req.body.gpu,
-    psu: req.body.psu,
-    image: req.body.image,
-    reviewLink: req.body.reviewLink,
-    price: req.body.price,
-  });
+router.patch("/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
 
-  newProduct.save().then((product) => res.json(product));
+  if (!product)
+    return res
+      .status(404)
+      .json({ msg: "There is no such product with the given ID" });
+
+  (product.title = req.body.title),
+    (product.case = req.body.case),
+    (product.motherboard = req.body.motherboard),
+    (product.cpu = req.body.cpu),
+    (product.ram = req.body.ram),
+    (product.storage = req.body.storage),
+    (product.gpu = req.body.gpu),
+    (product.psu = req.body.psu),
+    (product.image = req.body.image),
+    (product.reviewLink = req.body.reviewLink),
+    (product.price = req.body.price);
+
+  const updatedProduct = await product.save();
+
+  res.status(200).json({ product: updatedProduct.toObject() });
 });
 
 //route GET one product

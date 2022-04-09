@@ -5,8 +5,11 @@ function Feedbacks(props) {
   return (
     <div className={style.user_list}>
       <span>
-        <strong>{props.email}</strong> said: <strong>{props.content}</strong>
+        <strong>{props.email}</strong> said:
       </span>
+      <p>
+        <strong>{props.content}</strong>
+      </p>
     </div>
   );
 }

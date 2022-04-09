@@ -63,17 +63,17 @@ function Create(props) {
         .get(`http://localhost:5000/api/products/${props.id}`)
         .then((res) => {
           setEditProduct(res.data);
-          // setTitle(res.data.title),
-          //   setCaseName(res.data.caseName),
-          //   setMotherboard(res.data.motherboard),
-          //   setCpu(res.data.cpu),
-          //   setRam(res.data.ram),
-          //   setStorage(res.data.storage),
-          //   setGpu(res.data.gpu),
-          //   setPsu(res.data.psu),
-          //   setImage(res.data.image),
-          //   setReviewLink(res.data.reviewLink),
-          //   setPrice(res.data.price);
+          setTitle(res.data.title);
+          setCaseName(res.data.case);
+          setMotherboard(res.data.motherboard);
+          setCpu(res.data.cpu);
+          setRam(res.data.ram);
+          setStorage(res.data.storage);
+          setGpu(res.data.gpu);
+          setPsu(res.data.psu);
+          setImage(res.data.image);
+          setReviewLink(res.data.reviewLink);
+          setPrice(res.data.price);
         });
     } else {
       setIsEdit(false);
@@ -97,42 +97,41 @@ function Create(props) {
     });
     setValidated(isValid);
 
-    if (isValid) {
-      if (isEdit) {
-        axios
-          .patch(`http://localhost:5000/api/products/${props.id}`, {
-            title: editProduct.title,
-            case: editProduct.case,
-            motherboard: editProduct.motherboard,
-            cpu: editProduct.cpu,
-            ram: editProduct.ram,
-            storage: editProduct.storage,
-            gpu: editProduct.gpu,
-            psu: editProduct.psu,
-            image: editProduct.image,
-            reviewLink: editProduct.reviewLink,
-            price: editProduct.price,
-          })
-          .then((res) => console.log(res));
-      } else {
-        axios
-          .post("http://localhost:5000/api/products", {
-            title: title,
-            case: caseName,
-            motherboard: motherboard,
-            cpu: cpu,
-            ram: ram,
-            storage: storage,
-            gpu: gpu,
-            psu: psu,
-            image: image,
-            reviewLink: reviewLink,
-            price: price,
-          })
-          .then((res) => console.log(res));
+    if (!isEdit) {
+      axios
+        .post("http://localhost:5000/api/products", {
+          title: title,
+          case: caseName,
+          motherboard: motherboard,
+          cpu: cpu,
+          ram: ram,
+          storage: storage,
+          gpu: gpu,
+          psu: psu,
+          image: image,
+          reviewLink: reviewLink,
+          price: price,
+        })
+        .then((res) => console.log(res));
+      if (!isValid) {
+        setShow(true);
       }
     } else {
-      setShow(true);
+      axios
+        .patch(`http://localhost:5000/api/products/${props.id}`, {
+          title: title,
+          case: caseName,
+          motherboard: motherboard,
+          cpu: cpu,
+          ram: ram,
+          storage: storage,
+          gpu: gpu,
+          psu: psu,
+          image: image,
+          reviewLink: reviewLink,
+          price: price,
+        })
+        .then((res) => console.log(res));
     }
   };
 
@@ -178,8 +177,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter title"
-                onBlur={onTitleHandler}
                 defaultValue={isEdit ? editProduct.title : ""}
+                onBlur={onTitleHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicCase">
@@ -187,8 +186,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter case model"
-                onBlur={onCaseHandler}
                 defaultValue={isEdit ? editProduct.case : ""}
+                onBlur={onCaseHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicMotherboard">
@@ -196,8 +195,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter motherboard model"
-                onBlur={onMotherboardHandler}
                 defaultValue={isEdit ? editProduct.motherboard : ""}
+                onBlur={onMotherboardHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicCpu">
@@ -205,8 +204,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter CPU model"
-                onBlur={onCpuHandler}
                 defaultValue={isEdit ? editProduct.cpu : ""}
+                onBlur={onCpuHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicRAM">
@@ -214,8 +213,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter RAM type"
-                onBlur={onRamHandler}
                 defaultValue={isEdit ? editProduct.ram : ""}
+                onBlur={onRamHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicStorage">
@@ -223,8 +222,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter storage type"
-                onBlur={onStorageHandler}
                 defaultValue={isEdit ? editProduct.storage : ""}
+                onBlur={onStorageHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicGPU">
@@ -232,8 +231,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter GPU model"
-                onBlur={onGpuHandler}
                 defaultValue={isEdit ? editProduct.gpu : ""}
+                onBlur={onGpuHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicPSU">
@@ -241,8 +240,8 @@ function Create(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter PSU model"
-                onBlur={onPsuHandler}
                 defaultValue={isEdit ? editProduct.psu : ""}
+                onBlur={onPsuHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicImage">
@@ -250,8 +249,8 @@ function Create(props) {
               <Form.Control
                 type="link"
                 placeholder="Enter thumbnail link"
-                onBlur={onImageHandler}
                 defaultValue={isEdit ? editProduct.image : ""}
+                onBlur={onImageHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicYT">
@@ -259,8 +258,8 @@ function Create(props) {
               <Form.Control
                 type="link"
                 placeholder="Enter Youtube review link"
-                onBlur={onYoutubeHandler}
                 defaultValue={isEdit ? editProduct.reviewLink : ""}
+                onBlur={onYoutubeHandler}
               />
             </Form.Group>
             <Form.Group className="mb-2" controlId="formBasicPrice">
@@ -268,8 +267,8 @@ function Create(props) {
               <Form.Control
                 type="number"
                 placeholder="Set price"
-                onBlur={onPriceHandler}
                 defaultValue={isEdit ? editProduct.price : ""}
+                onBlur={onPriceHandler}
               />
             </Form.Group>
             <Button

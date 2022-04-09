@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Breadcrumb } from "react-bootstrap";
 import style from "../Admin/Admin.module.css";
 import Feedbacks from "./Feedbacks/Feedback";
 import Orders from "./Orders/Orders";
@@ -11,6 +12,7 @@ function Admin() {
   const [orders, setOrders] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
   const [products, setProducts] = useState([]);
+  const [bread, setBread] = useState("products");
 
   useEffect(() => {
     axios
@@ -30,45 +32,79 @@ function Admin() {
       .then((res) => setFeedbacks(res.data));
   }, []);
 
+  const onProductsHandler = () => {
+    setBread("products");
+  };
+
+  const onUsersHandler = () => {
+    setBread("users");
+  };
+
+  const onFeedbacksHandler = () => {
+    setBread("feedbacks");
+  };
+
   return (
     <div id={style.admin_panel}>
-      <div id={style.products_wrapper}>
-        <h4>Products</h4>
-        {products.map((product) => (
-          <Products
-            key={product._id}
-            id={product._id}
-            image={product.image}
-            title={product.title}
-            price={product.price}
-          />
-        ))}
-      </div>
-      <div id={style.users_wrapper}>
-        <div id={style.orders_container}>
-          <h4>Orders</h4>
-          {orders.map((order) => (
-            <Orders
-              key={order._id}
-              id={order._id}
-              orderNumber={order.order}
-              date={order.date}
-              total={order.total}
+      <Breadcrumb id={style.breadcrumb}>
+        <Breadcrumb.Item className={style.link} onClick={onProductsHandler}>
+          Products
+        </Breadcrumb.Item>
+        <Breadcrumb.Item className={style.link} onClick={onUsersHandler}>
+          Users
+        </Breadcrumb.Item>
+        <Breadcrumb.Item className={style.link} onClick={onFeedbacksHandler}>
+          Feedbacks
+        </Breadcrumb.Item>
+      </Breadcrumb>
+      {bread === "products" ? (
+        <div id={style.products_wrapper}>
+          <h4>Products</h4>
+          {products.map((product) => (
+            <Products
+              key={product._id}
+              id={product._id}
+              image={product.image}
+              title={product.title}
+              price={product.price}
             />
           ))}
         </div>
-        <div id={style.users_container}>
-          <h4>Users</h4>
-          {users.map((user) => (
-            <Users
-              key={user._id}
-              id={user._id}
-              name={user.name}
-              surname={user.surname}
-              email={user.email}
-            />
-          ))}
+      ) : (
+        ""
+      )}
+      {bread === "users" ? (
+        <div id={style.users_wrapper}>
+          <div id={style.orders_container}>
+            <h4>Orders</h4>
+            {orders.map((order) => (
+              <Orders
+                key={order._id}
+                id={order._id}
+                orderNumber={order.order}
+                date={order.date}
+                total={order.total}
+              />
+            ))}
+          </div>
+          ,
+          <div id={style.users_container}>
+            <h4>Users</h4>
+            {users.map((user) => (
+              <Users
+                key={user._id}
+                id={user._id}
+                name={user.name}
+                surname={user.surname}
+                email={user.email}
+              />
+            ))}
+          </div>
         </div>
+      ) : (
+        ""
+      )}
+      {bread === "feedbacks" ? (
         <div id={style.feedbacks_container}>
           <h4>Feedbacks</h4>
           {feedbacks.map((feedback) => (
@@ -80,7 +116,9 @@ function Admin() {
             />
           ))}
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
