@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import style from "../Admin/Admin.module.css";
+import Feedbacks from "./Feedbacks/Feedback";
 import Orders from "./Orders/Orders";
 import Products from "./Products/Products";
 import Users from "./Users/Users";
@@ -8,6 +9,7 @@ import Users from "./Users/Users";
 function Admin() {
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([]);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,6 +24,10 @@ function Admin() {
     axios
       .get("http://localhost:5000/api/orders/admin")
       .then((res) => setOrders(res.data));
+
+    axios
+      .get("http://localhost:5000/api/feedbacks")
+      .then((res) => setFeedbacks(res.data));
   }, []);
 
   return (
@@ -60,6 +66,17 @@ function Admin() {
               name={user.name}
               surname={user.surname}
               email={user.email}
+            />
+          ))}
+        </div>
+        <div id={style.feedbacks_container}>
+          <h4>Feedbacks</h4>
+          {feedbacks.map((feedback) => (
+            <Feedbacks
+              key={feedback._id}
+              id={feedback._id}
+              email={feedback.email}
+              content={feedback.content}
             />
           ))}
         </div>

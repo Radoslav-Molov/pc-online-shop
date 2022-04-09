@@ -29,7 +29,7 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 20px;
   border-radius: 10px;
-  height: 290px;
+  height: 195px;
   overflow: scroll;
   background-color: white;
 }
@@ -40,7 +40,18 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 20px;
   border-radius: 10px;
-  height: 290px;
+  height: 195px;
+  overflow: scroll;
+  background-color: white;
+}
+
+#feedbacks_container {
+  width: 100%;
+  border: 1px solid rgb(176, 175, 175);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 20px;
+  border-radius: 10px;
+  height: 195px;
   overflow: scroll;
   background-color: white;
 }
