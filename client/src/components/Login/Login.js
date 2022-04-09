@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { Link, Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "../Login/Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";

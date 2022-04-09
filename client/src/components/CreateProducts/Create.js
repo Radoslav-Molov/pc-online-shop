@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Modal, Container, Button, Form } from "react-bootstrap";
+import { Modal, Container, Button, Form, Alert } from "react-bootstrap";
 import style from "../CreateProducts/Create.module.css";
+import { addSchema } from "../Validation";
 
 function Create(props) {
   const [title, setTitle] = useState("");
@@ -17,6 +18,8 @@ function Create(props) {
   const [price, setPrice] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [editProduct, setEditProduct] = useState("");
+  const [validated, setValidated] = useState(true);
+  const [show, setShow] = useState(false);
 
   const onTitleHandler = (e) => {
     setTitle(e.target.value);
@@ -77,42 +80,69 @@ function Create(props) {
     }
   }, [props.edit]);
 
-  const onAddHandler = (e) => {
+  const onAddHandler = async (e) => {
     e.preventDefault();
-    if (isEdit) {
-      axios
-        .patch(`http://localhost:5000/api/products/${props.id}`, {
-          title: editProduct.title,
-          case: editProduct.case,
-          motherboard: editProduct.motherboard,
-          cpu: editProduct.cpu,
-          ram: editProduct.ram,
-          storage: editProduct.storage,
-          gpu: editProduct.gpu,
-          psu: editProduct.psu,
-          image: editProduct.image,
-          reviewLink: editProduct.reviewLink,
-          price: editProduct.price,
-        })
-        .then((res) => console.log(res));
+    const isValid = await addSchema.isValid({
+      title,
+      caseName,
+      motherboard,
+      cpu,
+      ram,
+      storage,
+      gpu,
+      psu,
+      image,
+      reviewLink,
+      price,
+    });
+    setValidated(isValid);
+
+    if (isValid) {
+      if (isEdit) {
+        axios
+          .patch(`http://localhost:5000/api/products/${props.id}`, {
+            title: editProduct.title,
+            case: editProduct.case,
+            motherboard: editProduct.motherboard,
+            cpu: editProduct.cpu,
+            ram: editProduct.ram,
+            storage: editProduct.storage,
+            gpu: editProduct.gpu,
+            psu: editProduct.psu,
+            image: editProduct.image,
+            reviewLink: editProduct.reviewLink,
+            price: editProduct.price,
+          })
+          .then((res) => console.log(res));
+      } else {
+        axios
+          .post("http://localhost:5000/api/products", {
+            title: title,
+            case: caseName,
+            motherboard: motherboard,
+            cpu: cpu,
+            ram: ram,
+            storage: storage,
+            gpu: gpu,
+            psu: psu,
+            image: image,
+            reviewLink: reviewLink,
+            price: price,
+          })
+          .then((res) => console.log(res));
+      }
     } else {
-      axios
-        .post("http://localhost:5000/api/products", {
-          title: title,
-          case: caseName,
-          motherboard: motherboard,
-          cpu: cpu,
-          ram: ram,
-          storage: storage,
-          gpu: gpu,
-          psu: psu,
-          image: image,
-          reviewLink: reviewLink,
-          price: price,
-        })
-        .then((res) => console.log(res));
+      setShow(true);
     }
   };
+
+  useEffect(() => {
+    if (show) {
+      setTimeout(() => {
+        setShow(false);
+      }, 3000);
+    }
+  }, [show]);
 
   return (
     <Modal size="lg" {...props} aria-labelledby="example-modal-sizes-title-lg">
@@ -126,11 +156,23 @@ function Create(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {show ? (
+          <Alert
+            className={style.notification}
+            variant="danger"
+            onClose={() => setShow(false)}
+            dismissible
+          >
+            <Alert.Heading>Invalid credentials!</Alert.Heading>
+          </Alert>
+        ) : (
+          ""
+        )}
         <Container>
           <h4>
             <strong>Product information</strong>
           </h4>
-          <Form id={style.order_form}>
+          <Form noValidate validated={validated} id={style.order_form}>
             <Form.Group className="mb-2" controlId="formBasicName">
               <Form.Label>Title</Form.Label>
               <Form.Control

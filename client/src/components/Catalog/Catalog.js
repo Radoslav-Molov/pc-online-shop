@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Breadcrumb } from "react-bootstrap";
 import style from "../Catalog/Catalog.module.css";
 import CatalogCard from "./CatalogCard/CatalogCard";
 

@@ -29,7 +29,6 @@ function App() {
     } else {
       setIsLoggedIn(false);
     }
-
     let token = localStorage.getItem("token");
 
     axios

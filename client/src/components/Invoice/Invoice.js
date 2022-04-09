@@ -12,9 +12,7 @@ function Invoice() {
     axios
       .get(`http://localhost:5000/api/orders/${invoiceId}`)
       .then((res) => setInvoice(res.data));
-  }, []);
-
-  console.log(invoice);
+  }, [invoiceId]);
 
   return (
     <div className={style.invoice_box}>

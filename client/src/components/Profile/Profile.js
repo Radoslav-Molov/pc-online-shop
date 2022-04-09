@@ -26,7 +26,7 @@ function Profile({}) {
         setOrders(filtered);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [user]);
 
   return (
     <div className={style.profile_container}>

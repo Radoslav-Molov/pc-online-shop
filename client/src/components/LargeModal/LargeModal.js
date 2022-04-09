@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Modal, Container, Button, Form, Alert } from "react-bootstrap";
 import { UserContext } from "../../UserContext";
 import style from "../LargeModal/LargeModal.module.css";
+import { loginSchema } from "../Validation";
 import EachProduct from "./EachProduct/EachProduct";
 
 function LargeModal(props) {
@@ -17,6 +18,7 @@ function LargeModal(props) {
   let [orderNumber, setOrderNumber] = useState(0);
   const { user, setUser } = useContext(UserContext);
   const [show, setShow] = useState(false);
+  const [validated, setValidated] = useState(true);
 
   const onNameHandler = (e) => {
     setName(e.target.value);
@@ -72,27 +74,38 @@ function LargeModal(props) {
     }
   }, [show]);
 
-  const onOrderHandler = (e) => {
+  const onOrderHandler = async (e) => {
     e.preventDefault();
 
-    setOrderNumber(orderNumber++);
+    const isValid = await loginSchema.isValid({
+      name,
+      surname,
+      number,
+      city,
+      address,
+    });
+    setValidated(isValid);
 
-    axios
-      .post("http://localhost:5000/api/orders", {
-        uid: user.id,
-        order: orderNumber,
-        total: total,
-        name: name,
-        surname: surname,
-        number: number,
-        city: city,
-        address: address,
-      })
-      .then((res) => {
-        setShow(true);
-        setCartProducts([]);
-      })
-      .catch((err) => console.log(err));
+    if (isValid) {
+      setOrderNumber(orderNumber++);
+
+      axios
+        .post("http://localhost:5000/api/orders", {
+          uid: user.id,
+          order: orderNumber,
+          total: total,
+          name: name,
+          surname: surname,
+          number: number,
+          city: city,
+          address: address,
+        })
+        .then((res) => {
+          setShow(true);
+          setCartProducts([]);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -138,7 +151,7 @@ function LargeModal(props) {
           <h4>
             <strong>Delivery information</strong>
           </h4>
-          <Form id={style.order_form}>
+          <Form noValidate validated={validated} id={style.order_form}>
             <Form.Group className="mb-2" controlId="formBasicName">
               <Form.Label>Name</Form.Label>
               <Form.Control

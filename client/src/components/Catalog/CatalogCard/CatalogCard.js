@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import style from "../CatalogCard/CatalogCard.module.css";

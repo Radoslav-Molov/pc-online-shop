@@ -83,7 +83,7 @@ function Register() {
       )}
       <div className={style.register_container}>
         <h1>Register</h1>
-        <Form>
+        <Form noValidate validated={validated}>
           <Form.Group controlId="formName">
             <Form.Label>Name:</Form.Label>
             <Form.Control
