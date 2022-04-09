@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Modal, Container, Button, Form, Alert } from "react-bootstrap";
 import { UserContext } from "../../UserContext";
 import style from "../LargeModal/LargeModal.module.css";
-import { loginSchema } from "../Validation";
+import { orderSchema } from "../Validation";
 import EachProduct from "./EachProduct/EachProduct";
 
 function LargeModal(props) {
@@ -77,7 +77,7 @@ function LargeModal(props) {
   const onOrderHandler = async (e) => {
     e.preventDefault();
 
-    const isValid = await loginSchema.isValid({
+    const isValid = await orderSchema.isValid({
       name,
       surname,
       number,
