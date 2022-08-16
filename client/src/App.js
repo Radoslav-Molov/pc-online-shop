@@ -17,11 +17,11 @@ import Admin from "./components/Admin/Admin";
 import { UserContext } from "./UserContext";
 import { ProtectedRoute } from "./ProtectedRoute";
 import axios from "axios";
+let refresh = {};
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(undefined);
-  let refresh = {};
 
   useEffect(() => {
     if (localStorage.getItem("token") !== undefined) {

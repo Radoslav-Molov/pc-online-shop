@@ -1,16 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { baseURL } from "../../util/http-request-url";
 import style from "../Invoice/Invoice.module.css";
 
 function Invoice() {
-  const [invoiceId, setInvoiceId] = useState(
-    window.location.pathname.split("/")[2]
-  );
+  const [invoiceId] = useState(window.location.pathname.split("/")[2]);
   const [invoice, setInvoice] = useState("");
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/orders/${invoiceId}`)
+      .get(`${baseURL}/orders/${invoiceId}`)
       .then((res) => setInvoice(res.data));
   }, [invoiceId]);
 

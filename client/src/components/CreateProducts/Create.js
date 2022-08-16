@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, Container, Button, Form, Alert } from "react-bootstrap";
 import style from "../CreateProducts/Create.module.css";
 import { addSchema } from "../Validation";
+import { baseURL } from "../../util/http-request-url";
 
 function Create(props) {
   const [title, setTitle] = useState("");
@@ -59,22 +60,20 @@ function Create(props) {
     if (props.edit === "true") {
       setIsEdit(true);
 
-      axios
-        .get(`http://localhost:5000/api/products/${props.id}`)
-        .then((res) => {
-          setEditProduct(res.data);
-          setTitle(res.data.title);
-          setCaseName(res.data.case);
-          setMotherboard(res.data.motherboard);
-          setCpu(res.data.cpu);
-          setRam(res.data.ram);
-          setStorage(res.data.storage);
-          setGpu(res.data.gpu);
-          setPsu(res.data.psu);
-          setImage(res.data.image);
-          setReviewLink(res.data.reviewLink);
-          setPrice(res.data.price);
-        });
+      axios.get(`${baseURL}/products/${props.id}`).then((res) => {
+        setEditProduct(res.data);
+        setTitle(res.data.title);
+        setCaseName(res.data.case);
+        setMotherboard(res.data.motherboard);
+        setCpu(res.data.cpu);
+        setRam(res.data.ram);
+        setStorage(res.data.storage);
+        setGpu(res.data.gpu);
+        setPsu(res.data.psu);
+        setImage(res.data.image);
+        setReviewLink(res.data.reviewLink);
+        setPrice(res.data.price);
+      });
     } else {
       setIsEdit(false);
     }
@@ -99,7 +98,7 @@ function Create(props) {
 
     if (!isEdit) {
       axios
-        .post("http://localhost:5000/api/products", {
+        .post(`${baseURL}/products`, {
           title: title,
           case: caseName,
           motherboard: motherboard,
@@ -118,7 +117,7 @@ function Create(props) {
       }
     } else {
       axios
-        .patch(`http://localhost:5000/api/products/${props.id}`, {
+        .patch(`${baseURL}/products/${props.id}`, {
           title: title,
           case: caseName,
           motherboard: motherboard,

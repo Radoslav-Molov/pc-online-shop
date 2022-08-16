@@ -5,6 +5,7 @@ import { UserContext } from "../../UserContext";
 import style from "../LargeModal/LargeModal.module.css";
 import { orderSchema } from "../Validation";
 import EachProduct from "./EachProduct/EachProduct";
+import { baseURL } from "../../util/http-request-url";
 
 function LargeModal(props) {
   const [cartProducts, setCartProducts] = useState([]);
@@ -47,7 +48,7 @@ function LargeModal(props) {
   useEffect(() => {
     let token = localStorage.getItem("token");
     axios
-      .get("http://localhost:5000/api/cart", {
+      .get(`${baseURL}/cart`, {
         headers: {
           "x-auth-token": token,
         },
@@ -90,7 +91,7 @@ function LargeModal(props) {
       setOrderNumber(orderNumber++);
 
       axios
-        .post("http://localhost:5000/api/orders", {
+        .post(`${baseURL}/orders`, {
           uid: user.id,
           order: orderNumber,
           total: total,

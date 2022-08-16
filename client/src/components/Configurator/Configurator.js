@@ -3,9 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Form, Image, Button, ListGroup, Alert } from "react-bootstrap";
 import { UserContext } from "../../UserContext";
 import style from "../Configurator/Configurator.module.css";
+import { baseURL } from "../../util/http-request-url";
 
 function Configurator({}) {
-  const { user, setUser } = useContext(UserContext);
+  const { user, _ } = useContext(UserContext);
   const [show, setShow] = useState(false);
 
   const [selectedCaseTitle, setSelectedCaseTitle] = useState(
@@ -80,7 +81,7 @@ function Configurator({}) {
 
   const onOrderHandler = () => {
     axios
-      .post("http://localhost:5000/api/cart", {
+      .post(`${baseURL}/cart`, {
         uid: user.id,
         title: "Custom build",
         image: selectedCaseImg,

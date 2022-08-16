@@ -95,7 +95,7 @@ function Home() {
             <Card.Img
               className={homeStyle.img}
               variant="top"
-              src="https://i.ebayimg.com/00/s/MTM1MFgxMDgw/z/NSkAAOSwgiJiFrPg/$_59.JPG"
+              src="https://storage-asset.msi.com/event/2020/vga/GeForce-RTX-30/images/update/kv-m.jpg"
               alt="MSI graphic cards"
             />
             <Card.Body>

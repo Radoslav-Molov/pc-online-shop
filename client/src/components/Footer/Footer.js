@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { baseURL } from "../../util/http-request-url";
 import style from "../Footer/Footer.module.css";
 // import { ListGroup, Row, Col } from "react-bootstrap";
 
@@ -20,7 +21,7 @@ function Footer() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/api/feedbacks", {
+      .post(`${baseURL}/feedbacks`, {
         email: email,
         content: content,
       })

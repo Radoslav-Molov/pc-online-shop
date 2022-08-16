@@ -6,6 +6,7 @@ import Feedbacks from "./Feedbacks/Feedback";
 import Orders from "./Orders/Orders";
 import Products from "./Products/Products";
 import Users from "./Users/Users";
+import { baseURL } from "../../util/http-request-url";
 
 function Admin() {
   const [users, setUsers] = useState([]);
@@ -15,21 +16,13 @@ function Admin() {
   const [bread, setBread] = useState("products");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/products")
-      .then((res) => setProducts(res.data));
+    axios.get(`${baseURL}/products`).then((res) => setProducts(res.data));
 
-    axios
-      .get("http://localhost:5000/api/users")
-      .then((res) => setUsers(res.data));
+    axios.get(`${baseURL}/users`).then((res) => setUsers(res.data));
 
-    axios
-      .get("http://localhost:5000/api/orders/admin")
-      .then((res) => setOrders(res.data));
+    axios.get(`${baseURL}/orders/admin`).then((res) => setOrders(res.data));
 
-    axios
-      .get("http://localhost:5000/api/feedbacks")
-      .then((res) => setFeedbacks(res.data));
+    axios.get(`${baseURL}/feedbacks`).then((res) => setFeedbacks(res.data));
   }, []);
 
   const onProductsHandler = () => {

@@ -6,12 +6,13 @@ import style from "../Login/Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import { loginSchema } from "../Validation";
+import { baseURL } from "../../util/http-request-url";
 
 function Login({}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(true);
 
@@ -31,7 +32,7 @@ function Login({}) {
 
     if (isValid) {
       axios
-        .post("http://localhost:5000/api/auth", {
+        .post(`${baseURL}/auth`, {
           email: email,
           password: password,
         })

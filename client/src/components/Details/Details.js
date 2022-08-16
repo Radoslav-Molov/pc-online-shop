@@ -11,25 +11,24 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { UserContext } from "../../UserContext";
+import { baseURL } from "../../util/http-request-url";
 
 function Details() {
-  const [productId, setProductId] = useState(
-    window.location.pathname.split("/")[2]
-  );
+  const [productId] = useState(window.location.pathname.split("/")[2]);
   const [productInfo, setProductInfo] = useState("");
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${productId}`)
+      .get(`${baseURL}/products/${productId}`)
       .then((res) => setProductInfo(res.data))
       .catch((err) => console.log(err));
   }, [productId]);
 
   const onOrderHandler = () => {
     axios
-      .post("http://localhost:5000/api/cart", {
+      .post(`${baseURL}/cart`, {
         uid: user.id,
         image: productInfo.image,
         title: productInfo.title,

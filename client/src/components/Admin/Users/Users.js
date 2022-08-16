@@ -2,11 +2,12 @@ import axios from "axios";
 import React from "react";
 import { Button } from "react-bootstrap";
 import style from "../Users/Users.module.css";
+import { baseURL } from "../../../util/http-request-url";
 
 function Users(props) {
   const onRemoveHandler = () => {
     axios
-      .delete(`http://localhost:5000/api/users/${props.id}`)
+      .delete(`${baseURL}/users/${props.id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

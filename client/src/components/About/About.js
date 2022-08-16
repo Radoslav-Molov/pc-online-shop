@@ -6,7 +6,7 @@ import style from "../About/About.module.css";
 import L from "leaflet";
 
 function About() {
-  const [center, setCenter] = useState({ lat: "42.677679", lng: "23.261483" });
+  const [center, _] = useState({ lat: "42.677679", lng: "23.261483" });
   const ZOOM_LEVEL = 9;
 
   const markerIcon = new L.Icon({

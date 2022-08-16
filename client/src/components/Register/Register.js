@@ -5,6 +5,7 @@ import style from "../Register/Register.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { registerSchema } from "../Validation";
+import { baseURL } from "../../util/http-request-url";
 
 function Register() {
   const [name, setName] = useState("");
@@ -44,7 +45,7 @@ function Register() {
 
     if (isValid) {
       axios
-        .post("http://localhost:5000/api/users", {
+        .post(`${baseURL}/users`, {
           name: name,
           surname: surname,
           email: email,

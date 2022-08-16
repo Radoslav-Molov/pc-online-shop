@@ -4,10 +4,11 @@ import { Card } from "react-bootstrap";
 import axios from "axios";
 import EachOrder from "./EachOrder/EachOrder";
 import { UserContext } from "../../UserContext";
+import { baseURL } from "../../util/http-request-url";
 
 function Profile({}) {
   const [orders, setOrders] = useState([]);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     let filtered = [];
@@ -15,7 +16,7 @@ function Profile({}) {
     let token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:5000/api/orders", {
+      .get(`${baseURL}/orders`, {
         headers: {
           "x-auth-token": token,
         },

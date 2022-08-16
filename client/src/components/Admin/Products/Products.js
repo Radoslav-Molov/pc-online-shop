@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Create from "../../CreateProducts/Create";
 import style from "../Products/Products.module.css";
+import { baseURL } from "../../../util/http-request-url";
 
 function Products(props) {
   const [modalCreateShow, setModalCreateShow] = useState(false);
@@ -10,7 +11,7 @@ function Products(props) {
 
   const onDeleteHandler = () => {
     axios
-      .delete(`http://localhost:5000/api/products/${props.id}`)
+      .delete(`${baseURL}/products/${props.id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

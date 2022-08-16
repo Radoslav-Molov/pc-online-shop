@@ -1,12 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import { baseURL } from "../../../util/http-request-url";
 import style from "../EachProduct/LargeModal.module.css";
 
 function EachProduct(props) {
   const onProductRemoveHandler = () => {
     axios
-      .delete(`http://localhost:5000/api/cart/${props.id}`)
+      .delete(`${baseURL}/cart/${props.id}`)
       .then((res) => {
         console.log(res);
         props.onDelete();

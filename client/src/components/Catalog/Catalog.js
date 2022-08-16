@@ -2,14 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import style from "../Catalog/Catalog.module.css";
 import CatalogCard from "./CatalogCard/CatalogCard";
+import { baseURL } from "../../util/http-request-url";
 
 function Catalog() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/products")
-      .then((res) => setProducts(res.data));
+    axios.get(`${baseURL}/products`).then((res) => setProducts(res.data));
   }, []);
 
   return (
